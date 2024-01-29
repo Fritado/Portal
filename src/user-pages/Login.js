@@ -21,19 +21,19 @@ const Login= () =>  {
 	};
 
   const handelOnSubmit = async(e) => {
-    // e.preventDefault();
-    // try{
-    //   const url = "http://localhost:4000/api/v1/auth/login";
-    //   const { formData: res } = await axios.post(url, formData);
-    //   console.log(res);
-    //   //localStorage.setItem("token", res);
-    //   //history.push("/dashboard");
+     e.preventDefault();
+    try{
+      const url = "http://localhost:4000/api/v1/auth/login";
+      const { formData: res } = await axios.post(url, formData);
+      localStorage.setItem("token", res);
+      history.push("/business-domain");
+      console.log(res);
 
-    // }
-    // catch(error){
-    //   console.log(error);
+    }
+    catch(error){
+      console.log(error);
 
-    // }
+    }
     //console.log(formData);
     //dispatch(login(email, password, navigate));
   };
@@ -42,7 +42,7 @@ const Login= () =>  {
         <div className="d-flex align-items-center auth px-0">
           <div className="row w-100 mx-0 d-flex flex-column mx-auto">
             <div className="col-lg-4 mx-auto">
-              <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div className="auth-form-light text-left py-5 px-4 px-sm-5 mt-5">
                 <div className="brand-logo">
                   <img
                     src={require("../assets/images/logo2.png")}
@@ -85,29 +85,29 @@ const Login= () =>  {
                 </button>
                   <div className="my-2 d-flex justify-content-between align-items-center">
                     <div className="form-check">
-                      <label className="form-check-label text-muted">
+                      <label className="form-check-label text-secondary">
                         <input type="checkbox" className="form-check-input" />
                         <i className="input-helper"></i>
                         Remember me
                       </label>
                     </div>
-                    <a
-                      href="!#"
+                    <Link
+                      to="/forgot-password"
                       onClick={(event) => event.preventDefault()}
-                      className="auth-link text-black"
+                      className="auth-link text-secondary"
                     >
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="text-center mt-4 font-weight-light">
                     Don't have an account?{" "}
-                    <Link to="/user-pages/register" className="font-color">
+                    <Link to="/signup" className="text-color">
                       Create
                     </Link>
                   </div>
                   <div className="text-center mt-4 font-weight-light">
-                    <Link to="/user-pages/register" className="font-color">
+                    <Link to="/signup" className="text-color">
                       Need help signing in?
                     </Link>
                   </div>

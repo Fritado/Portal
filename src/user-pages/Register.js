@@ -26,12 +26,12 @@ const Register = () => {
 
   //handle input field when some value will change
   const handleOnChange = (event) => {
-    console.log(event.target.value);
+   // console.log(event.target.value);
     const { name, value, checked, type } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
-      //[e.target.name]: e.target.value,
+      
     }));
   };
   //handle from submission
@@ -49,7 +49,7 @@ const Register = () => {
     const signupData = { ...formData };
 
     //setting signup data to store to be used after otp verification
-    dispatch(setSignupData(signupData));
+    //dispatch(setSignupData(signupData));
 
     //send otp to user for verification
     //dispatch(sendOtp(formData.email));
@@ -66,9 +66,9 @@ const Register = () => {
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
-        <div className="row w-100 mx-0">
+        <div className="row w-100 mx-0 d-flex flex-column mx-auto">
           <div className="col-lg-4 mx-auto">
-            <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+            <div className="auth-form-light text-left py-5 px-4 px-sm-5 mt-5">
               <div className="brand-logo">
                 <img
                   src={require("../assets/images/logo2.png")}
@@ -81,14 +81,14 @@ const Register = () => {
                 Signing up is easy. It only takes a few steps
               </h6>
               <form onSubmit={handleOnSubmit} className="pt-3">
-                <div className="form-group d-flex gap-6">
+                <div className="form-group d-flex gap-3">
                   <input
                     required
                     type="text"
                     name="firstname"
                     value={firstname}
                     onChange={handleOnChange}
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg mr-2"
                     id="exampleInputUsername1"
                     placeholder="Firstname"
                   />
@@ -98,7 +98,7 @@ const Register = () => {
                     name="lastname"
                     value={lastname}
                     onChange={handleOnChange}
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg ml-2"
                     id="exampleInputUsername1"
                     placeholder="Lastname"
                   />
@@ -162,8 +162,8 @@ const Register = () => {
                   SIGN UP
                 </button>
                 <div className="text-center mt-4 font-weight-light">
-                  Already have an account?{" "}
-                  <Link to="/user-pages/login" className="text-primary">
+                  Already have an account? {" "}
+                  <Link to="/login" className="text-color">
                     Login
                   </Link>
                 </div>

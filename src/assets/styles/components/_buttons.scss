@@ -123,15 +123,15 @@
     }
     &:focus,
     &:active {
-      background: $value;
-      border-color: $value;
+      background: rgba(47,130,162,.859);
+      border-color:rgba(47,130,162,.859);
     }
   }
   .btn-outline-#{$color} {
     &:hover,
     &:focus,
     &:active {
-      background: theme-color($color);
+      background:  rgba(47,130,162,.859);
       color: $white;
     }
   }

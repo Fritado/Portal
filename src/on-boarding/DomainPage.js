@@ -47,7 +47,7 @@ const DomainPage = () => {
               </form>
             </div>
               <Link to="/plan" className="d-flex">
-            <span className=" my-4 font-weight-bold text-muted mx-auto">
+            <span className=" mt-4 font-weight-bold text-muted mx-auto">
                 Next
                 <span>
                   <MdKeyboardDoubleArrowRight />

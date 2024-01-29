@@ -6,8 +6,8 @@ const AuthFooter = ({ footdec }) => {
     <div className=" mt-4 d-flex flex-column align-items-center auth px-0  position-relative">
       
 
-      <div className=" w-100 m-4 border border-top-2 "></div>
-      <div className=" mt-4 text-center d-flex mx-auto">
+      <div className=" w-100 mt-5 mx-5 border border-top-2 "></div>
+      <div className=" mt-3 text-center d-flex mx-auto">
         <p>{footdec}</p>
       </div>
     </div>
