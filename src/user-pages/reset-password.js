@@ -1,16 +1,37 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
+import { useHistory , useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+
+//this page will open after hiting url from email.
 
 const ResetPassword = () => {
-    const [showPassword, setShowPassword] = useState(false);
+  const history = useHistory();
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const {token} = useParams();
+
+  const handelSubmit = async (e) =>{
+    e.preventDefault();
+    try {
+     
+      const url = `http://localhost:4000/api/v1/auth/reset-password/${token}`;
+      const res = await axios.post(url , {showPassword,showConfirmPassword, token });
+      toast.success("Password Reset Successfull");
+      history.push("/login");
+    } catch (error) {
+      toast.error('This is an error!');
+      console.log(error);
+    }
+  }
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
-        <div className="row w-100 mx-0">
-          <div className="col-lg-4 mx-auto">
-            <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+        <div className="row w-100 mx-0 d-flex flex-column mx-auto">
+          <div className="col-lg-4 mx-auto pt-5">
+            <div className="auth-form-light text-left py-5 px-4 px-sm-5 mt-4">
               <div className="brand-logo">
                 <img
                   src={require("../assets/images/logo2.png")}
@@ -46,20 +67,21 @@ const ResetPassword = () => {
 
                 <button
                   type="submit"
+                  disabled={ !showPassword||
+                    !showConfirmPassword }
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
-                 RESET PASSWORD
+                  RESET PASSWORD
                 </button>
                 <div className="text-center mt-4 font-weight-light">
-                    <Link to="/user-pages/register" className="font-color">
-                      Need help signing in?
-                    </Link>
-                  </div>
+                  <Link to="/signup" className="text-color">
+                    Need help signing in?
+                  </Link>
+                </div>
               </form>
             </div>
           </div>
           <AuthFooter
-           
             footdec={
               "© 2024 Copyright Fritado Technologies. All rights reserved"
             }

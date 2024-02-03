@@ -1,12 +1,9 @@
 import { endpoints } from "../api";
 import { setToken } from "../../slice/authSlice";
 import { apiConnector } from "../apiConnector";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
- 
-const { SENDOTP_API, SIGNUP_API, LOGIN_API } = endpoints;
-
-
+const { SENDOTP_API, SIGNUP_API, LOGIN_API ,  RESETPASSTOKEN_API , RESETPASSWORD_API } = endpoints;
 
 export function sendOtp(email) {
   return async () => {
@@ -21,10 +18,10 @@ export function sendOtp(email) {
       if (!response.data.success) {
         throw new Error(response.data.success);
       }
-     // window.location.replace("/verify-otp");
-   // navigate("/verify-otp")
+      // window.location.replace("/verify-otp");
+      // navigate("/verify-otp")
     } catch (error) {
-      console.log(error)
+      console.log(error);
       console.log("SENDOTP API ERROR", error.message);
     }
   };
@@ -36,8 +33,7 @@ export function signUp(
   email,
   password,
   confirmPassword,
-  otp,
-
+  otp
 ) {
   return async () => {
     try {
@@ -53,16 +49,15 @@ export function signUp(
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-     // window.location.replace("/login");
-     // navigate("/login");
+      // window.location.replace("/login");
+      // navigate("/login");
     } catch (error) {
       console.log("SIGNUP API ERROR............", error);
-     // window.location.replace("/register");
-     // navigate("/signup")
+      // window.location.replace("/register");
+      // navigate("/signup")
     }
   };
 }
-
 
 export function login(email, password, history) {
   return async (dispatch) => {
@@ -94,3 +89,43 @@ export function login(email, password, history) {
 //     navigate("/");
 //   };
 // }
+
+export function getPasswordResetToken(email, setEmailSent) {
+  return async (dispatch) => {
+    try {
+      const response = await apiConnector("POST", RESETPASSTOKEN_API);
+      console.log("Reset password token response...", response);
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      setEmailSent(true);
+    } catch (error) {
+      console.log("Reset password token error ", error);
+    }
+  };
+}
+
+
+export function resetPassword(password, confirmPassword, token) {
+  return async (dispatch) => {
+    
+    try {
+      const response = await apiConnector("POST", RESETPASSWORD_API, {
+        password,
+        confirmPassword,
+        token,
+      });
+      console.log("RESET Password RESPONSE ... ", response);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+     
+    } catch (error) {
+      console.log("RESET PASSWORD TOKEN Error", error);
+      
+    }
+   
+  };
+}

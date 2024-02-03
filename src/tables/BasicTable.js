@@ -222,6 +222,7 @@ export class BasicTable extends Component {
               </div>
             </div>
           </div>
+          
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">

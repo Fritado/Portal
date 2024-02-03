@@ -57,7 +57,7 @@
             margin-right: 0;
           }
           .menu-icon {
-            color: $sidebar-dark-icon-color; 
+            color: rgba(47,130,162,.859); 
 
             &:after,
             &:before {
@@ -152,12 +152,12 @@
             }
           }
           .menu-title {
-            color: $sidebar-dark-menu-active-color;
+            color: rgba(47,130,162,.859);
             font-family: $type1;
             font-weight: 600;          
           }
           i {
-            color: theme-color(success);
+            color: rgba(47,130,162,.859);
           }
         }
       }
@@ -336,10 +336,10 @@
             font-size: .75rem;
           }
           &.active {
-            color: $sidebar-dark-menu-active-color;
+            color: rgba(47,130,162,.859);
             background: transparent;
             &:before {
-              color: theme-color(success);
+              color: rgba(47,130,162,.859);
             }
           }
           &:hover {

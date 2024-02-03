@@ -1,5 +1,18 @@
 /* Dashboard */
 
+/*Profile css*/
+.profile{
+  column-gap: 18px;
+  padding : 25px ;
+}
+.profile-pic{
+  aspect-ratio: 1 / 1;
+  width: 78px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border :2px solid black;
+}
+
 .transaparent-tab-border {
   border-bottom: 1px solid $nav-tabs-border-color
   }

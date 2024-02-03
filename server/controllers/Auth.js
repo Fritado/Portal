@@ -38,8 +38,8 @@ exports.sendOtp = async (req, res) => {
       });
     }
 
-    const otpPayload = { email, otp }
-    const otpBody = Otp.create( otpPayload);
+    const otpPayload = { email, otp };
+    const otpBody = Otp.create(otpPayload);
     console.log("OTP Body", otpBody);
 
     return res.status(200).json({
@@ -57,23 +57,19 @@ exports.sendOtp = async (req, res) => {
 exports.signup = async (req, res) => {
   try {
     //Destructure fields from  request body
-    const { firstname, lastname, email, password, confirmPassword} =
-      req.body;
+    const { firstname, lastname, email, password, confirmPassword } = req.body;
 
-    if (
-      !firstname ||
-      !lastname ||
-      !email ||
-      !password ||
-      !confirmPassword
-      
-    ) {
+    if (!firstname || !lastname || !email || !password || !confirmPassword) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
       });
     }
-
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password should be atleast 6 characters" });
+    }
     // Check if password and confirm password match
     if (password != confirmPassword) {
       return res.status(400).json({
@@ -213,8 +209,8 @@ exports.changePassword = async (req, res) => {
       userDetails.password
     );
 
+    // If old password does not match, return a 401 (Unauthorized) error
     if (!isPasswordMatch) {
-      // If old password does not match, return a 401 (Unauthorized) error
       return res
         .status(401)
         .json({ success: false, message: "The password is incorrect" });
@@ -229,6 +225,24 @@ exports.changePassword = async (req, res) => {
     );
 
     //send notification email
+    try {
+      const emailResponse = await mailSender(
+        updatedUserDeatils.email,
+        "Password for your account has been updated",
+        passwordUpdated(
+          updatedUserDeatils.email,
+          `Password updated successfully for ${updatedUserDeatils.firstname} ${updatedUserDeatils.lastname}`
+        )
+      );
+      console.log("Email sent successfully:", emailResponse.response);
+    } catch (err) {
+      console.log("Error occurred while sending email:", err);
+      return res.status(500).json({
+        success: false,
+        message: "Error occurred while sending email",
+        error: err.message,
+      });
+    }
     return res
       .status(200)
       .json({ success: true, message: "Password updated successfully" });

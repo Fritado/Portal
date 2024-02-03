@@ -6,32 +6,32 @@ import { useHistory } from "react-router-dom";
 import { setSignupData } from "../slice/authSlice";
 import AuthFooter from "../common/AuthFooter";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    mode: "",
+    isVisible: false,
+    
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { firstname, lastname, email, password, confirmPassword, mode } =
+  const { firstname, lastname, email, password, confirmPassword, isVisible } =
     formData;
 
   //handle input field when some value will change
   const handleOnChange = (event) => {
-   // console.log(event.target.value);
+    // console.log(event.target.value);
     const { name, value, checked, type } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
-      
     }));
   };
   //handle from submission
@@ -40,9 +40,12 @@ const Register = () => {
     try {
       const url = "http://localhost:4000/api/v1/auth/signup";
       const { formData: res } = await axios.post(url, formData);
+      toast.success("Login Successfull");
+
       history.push("/login");
-      console.log(res);
+      // console.log(res);
     } catch (error) {
+      toast.error("This is an error!");
       console.log(error);
     }
 
@@ -60,15 +63,16 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      
     });
   };
-
+  
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
         <div className="row w-100 mx-0 d-flex flex-column mx-auto">
-          <div className="col-lg-4 mx-auto">
-            <div className="auth-form-light text-left py-5 px-4 px-sm-5 mt-5">
+          <div className="col-lg-4 mx-auto pt-5">
+            <div className="auth-form-light text-left py-5 px-4 px-sm-5 mt-4">
               <div className="brand-logo">
                 <img
                   src={require("../assets/images/logo2.png")}
@@ -144,10 +148,10 @@ const Register = () => {
                     <label className="form-check-label text-muted">
                       <input
                         type="checkbox"
-                        name="mode"
+                        name="isVisible"
                         value="terms-condition"
                         onChange={handleOnChange}
-                        checked={mode === "terms-condition"}
+                        checked={isVisible}
                         className="form-check-input"
                       />
                       <i className="input-helper"></i>I agree to all Terms &
@@ -157,12 +161,14 @@ const Register = () => {
                 </div>
                 <button
                   type="submit"
+                  disabled={!firstname ||!lastname|| !email|| !password||
+                  !confirmPassword || !isVisible}
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
                   SIGN UP
                 </button>
                 <div className="text-center mt-4 font-weight-light">
-                  Already have an account? {" "}
+                  Already have an account?{" "}
                   <Link to="/login" className="text-color">
                     Login
                   </Link>
@@ -171,7 +177,6 @@ const Register = () => {
             </div>
           </div>
           <AuthFooter
-            
             footdec={
               "© 2024 Copyright Fritado Technologies. All rights reserved"
             }
