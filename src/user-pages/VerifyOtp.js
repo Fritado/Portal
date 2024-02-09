@@ -80,9 +80,7 @@ const VerifyOtp = () => {
             </div>
           </form>
         </div>
-        <AuthFooter
-          footdec={"© 2024 Copyright Fritado Technologies. All rights reserved"}
-        />
+        <AuthFooter />
       </div>
     </div>
   );

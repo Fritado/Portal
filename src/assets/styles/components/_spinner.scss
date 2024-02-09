@@ -1,37 +1,18 @@
-.spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - #{$navbar-height} - 5.5rem);
-  position: fixed;
-  width: calc(100% - #{$sidebar-width-lg} - 4rem);
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-  .donut {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    border: 0.3rem solid lighten(theme-color(primary),30%);
-    border-top-color: lighten(theme-color(primary),10%);
-    animation: 1.5s spin infinite linear;
-  }
+.spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  padding: 1.1px;
+  background: conic-gradient(#0000 10%,rgba(47, 130, 162, 0.86)) content-box;
+  -webkit-mask: repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+       radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 calc(100% - 9px));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: spinner-d55elj 1s infinite steps(10);
 }
 
-:host-context(.sidebar-icon-only) {
-  .spinner-wrapper {
-    width: calc(100% - #{$sidebar-width-icon} - 4rem);    
-  }
-}
-
-:host-context(.sidebar-mini) {
-  .spinner-wrapper {
-    width: calc(100% - #{$sidebar-width-mini} - 4rem);    
-  }
-}
-
-@keyframes spin {
+@keyframes spinner-d55elj {
   to {
-    transform: rotate(360deg);
+     transform: rotate(1turn);
   }
 }

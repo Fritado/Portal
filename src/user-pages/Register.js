@@ -18,7 +18,6 @@ const Register = () => {
     password: "",
     confirmPassword: "",
     isVisible: false,
-    
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -63,10 +62,9 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      
     });
   };
-  
+
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
@@ -161,8 +159,14 @@ const Register = () => {
                 </div>
                 <button
                   type="submit"
-                  disabled={!firstname ||!lastname|| !email|| !password||
-                  !confirmPassword || !isVisible}
+                  disabled={
+                    !firstname ||
+                    !lastname ||
+                    !email ||
+                    !password ||
+                    !confirmPassword ||
+                    !isVisible
+                  }
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
                   SIGN UP
@@ -176,11 +180,7 @@ const Register = () => {
               </form>
             </div>
           </div>
-          <AuthFooter
-            footdec={
-              "© 2024 Copyright Fritado Technologies. All rights reserved"
-            }
-          />
+          <AuthFooter />
         </div>
       </div>
     </div>

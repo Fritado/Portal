@@ -72,11 +72,7 @@ const ForgotPassword = () => {
               </form>
             </div>
           </div>
-          <AuthFooter
-            footdec={
-              "© 2024 Copyright Fritado Technologies. All rights reserved"
-            }
-          />
+          <AuthFooter />
         </div>
       </div>
     </div>
@@ -84,5 +80,3 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
-
-/**pop-up -> toast {We've sent the password reset link to your email address. Please check your inbox. If you need assistance, feel free to contact our support team.} */

@@ -1,6 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import Spinner from "./shared/Spinner";
 import Profile from "./components/Profile";
 import FbConnect from "./API-Channels/FbConnect";
@@ -12,17 +11,12 @@ import keywords from "./on-boarding-menu/Keywords";
 import Competetors from "./on-boarding-menu/Competetors";
 import AddKeyword from "./on-boarding-menu/AddKeyword";
 import BillingPlans from "./components/BillingPlans";
+import PageSpeedInsights from "./on-boarding/PageSpeedInsights";
+import ConnectWebsite from "./on-boarding/ConnectWebsite"
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
-const Buttons = lazy(() => import("./basic-ui/Buttons"));
-const Dropdowns = lazy(() => import("./basic-ui/Dropdowns"));
-const Typography = lazy(() => import("./basic-ui/Typography"));
-
-const BasicElements = lazy(() => import("./form-elements/BasicElements"));
 
 const BasicTable = lazy(() => import("./tables/BasicTable"));
-
-const Mdi = lazy(() => import("./icons/Mdi"));
 
 const ChartJs = lazy(() => import("./charts/ChartJs"));
 
@@ -37,7 +31,6 @@ const ForgotPassword = lazy(() => import("./user-pages/ForgotPassword"));
 const DomainPage = lazy(() => import("./on-boarding/DomainPage"));
 const Pricing = lazy(() => import("./on-boarding/Pricing"));
 const selectPlan = lazy(() => import("./on-boarding/SelectPlan"));
-const PlanInfo = lazy(() => import("./on-boarding/PlanInfo"));
 const VerifyOtp = lazy(() => import("./user-pages/VerifyOtp"));
 
 class AppRoutes extends Component {
@@ -47,18 +40,7 @@ class AppRoutes extends Component {
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
 
-          <Route path="/basic-ui/buttons" component={Buttons} />
-          <Route path="/basic-ui/dropdowns" component={Dropdowns} />
-          <Route path="/basic-ui/typography" component={Typography} />
-
           <Route path="/tables/basic-table" component={BasicTable} />
-
-          <Route
-            path="/form-Elements/basic-elements"
-            component={BasicElements}
-          />
-
-          <Route path="/icons/mdi" component={Mdi} />
 
           <Route path="/charts/chart-js" component={ChartJs} />
 
@@ -73,7 +55,7 @@ class AppRoutes extends Component {
           <Route path="/business-domain" component={DomainPage} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/plan" component={selectPlan} />
-          <Route path="/plan-info" component={PlanInfo} />
+          <Route path="/pagespeed-insights" component={PageSpeedInsights} />
           <Route path="/profile" component={Profile} />
           <Route path="/fb-connect" component={FbConnect} />
           <Route path="/email-api" component={Email} />
@@ -83,7 +65,9 @@ class AppRoutes extends Component {
           <Route path="/keywords" component={keywords} />
           <Route path="/competetor" component={Competetors} />
           <Route path="/add-keyword" component={AddKeyword} />
-          <Route path="/billing-plan" component={BillingPlans } />
+          <Route path="/billing-plan" component={BillingPlans} />
+          <Route path="/connect-website" component={ConnectWebsite} />
+
           <Redirect to="/dashboard" />
         </Switch>
       </Suspense>

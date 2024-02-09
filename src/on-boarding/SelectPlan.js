@@ -1,6 +1,7 @@
 import React from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
+import AuthFooter from "../common/AuthFooter";
 
 const SelectPlan = () => {
   return (
@@ -19,6 +20,7 @@ const SelectPlan = () => {
             </span>
         </span>
           </Link>
+          <AuthFooter />
     </div>
   );
 };

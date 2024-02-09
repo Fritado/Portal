@@ -1,10 +1,73 @@
-import React from "react";
-import { ProgressBar } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
-import {Link} from "react-router-dom";
-import { SlGlobe } from "react-icons/sl";
+import { Link } from "react-router-dom";
+import { IoDiamond, IoArrowDownOutline } from "react-icons/io5";
+import { RiArrowUpDownLine } from "react-icons/ri";
+import AddKeyword from "./AddKeyword";
+import axios from "axios";
 
-const keywords = () => {
+const Keywords = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [keyword, setKeyword] = useState([]);
+  const [filterVal, setFilterVal] = useState("");
+  const [searchApiData, setSearchAPIData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 4;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = keyword.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(keyword.length / recordsPerPage);
+  const numbers = [...Array(totalPages + 1).keys()].slice(1);
+
+  const columns = [
+    { dataField: "id", text: "Id" },
+    { dataField: "name", text: "Name", sort: true },
+    { dataField: "username", text: "username", sort: true },
+  ];
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((res) => {
+        setKeyword(res);
+        setSearchAPIData(res);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+  function nextPage() {
+    if (currentPage !== totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function changeCurrentPage(id) {
+    setCurrentPage(id);
+  }
+  const handleFilter = (e) => {
+    if (e.target.value === "") {
+      setKeyword(searchApiData);
+    } else {
+      const filteredData = searchApiData.filter(
+        (item) =>
+          item.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          item.username.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+
+      if (filteredData.length > 0) {
+        setKeyword(filteredData);
+      } else {
+        setKeyword([{ name: "No Data" }]);
+      }
+    }
+    setFilterVal(e.target.value);
+  };
+
   return (
     <div>
       <div className="page-header">
@@ -35,130 +98,102 @@ const keywords = () => {
                 Fritado suggests focusing on easily accessible keywords,
                 considering the popularity of your website
               </h4>
-              <div style={{ textAlign: "right" }} className="mt-2" >
-                <Link to="/add-keyword"> 
-                <button className="btn btn-primary border rounded py-2 px-3 mx-2">
-                  
-                  Add {" "}
+              <div className="mt-4 pt-3 d-flex flex-row justify-content-between">
+                <div>
+                  <input
+                    type="search"
+                    placeholder="Search"
+                    value={filterVal}
+                    onInput={(e) => handleFilter(e)}
+                    className="px-4 py-2 border rounded mb-3"
+                  />
+                </div>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="btn btn-primary border py-0 rounded px-3 "
+                >
+                  Add{" "}
                   <span>
-                    <MdAdd size={22}/>
+                    <MdAdd size={22} />
                   </span>
                 </button>
-                </Link>
               </div>
+              {showModal && (
+                <AddKeyword OncloseModal={() => setShowModal(false)} />
+              )}
 
               <div className="table-responsive">
                 <table className="table table-striped">
                   <thead>
                     <tr>
-                      <th> User </th>
-                      <th> First name </th>
-                      <th> Progress </th>
-                      <th> Amount </th>
-                      <th> Deadline </th>
+                      <th style={{ paddingLeft: "2.5rem" }}>
+                        {" "}
+                        <span className="pr-2">
+                          <RiArrowUpDownLine size={18} />
+                        </span>
+                        Keyword{" "}
+                      </th>
+                      <th style={{ textAlign: "end" }}>
+                        Monthly Searches{" "}
+                        <span className="pl-1">
+                          <IoArrowDownOutline size={18} />
+                        </span>
+                      </th>
+                      <th>
+                        Difficulty{" "}
+                        <span className="pl-2">
+                          <RiArrowUpDownLine size={18} />
+                        </span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face1.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> Herman Beck </td>
-                      <td>
-                        <ProgressBar variant="success" now={25} />
-                      </td>
-                      <td> $ 77.99 </td>
-                      <td> May 15, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face2.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> Messsy Adam </td>
-                      <td>
-                        <ProgressBar variant="danger" now={75} />
-                      </td>
-                      <td> $245.30 </td>
-                      <td> July 1, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face3.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> John Richards </td>
-                      <td>
-                        <ProgressBar variant="warning" now={90} />
-                      </td>
-                      <td> $138.00 </td>
-                      <td> Apr 12, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face4.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> Peter Meggik </td>
-                      <td>
-                        <ProgressBar variant="primary" now={50} />
-                      </td>
-                      <td> $ 77.99 </td>
-                      <td> May 15, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face5.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> Edward </td>
-                      <td>
-                        <ProgressBar variant="danger" now={60} />
-                      </td>
-                      <td> $ 160.25 </td>
-                      <td> May 03, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face6.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> John Doe </td>
-                      <td>
-                        <ProgressBar variant="info" now={65} />
-                      </td>
-                      <td> $ 123.21 </td>
-                      <td> April 05, 2015 </td>
-                    </tr>
-                    <tr>
-                      <td className="py-1">
-                        <img
-                          src={require("../assets/images/faces/face7.jpg")}
-                          alt="user icon"
-                        />
-                      </td>
-                      <td> Henry Tom </td>
-                      <td>
-                        <ProgressBar variant="warning" now={20} />
-                      </td>
-                      <td> $ 150.00 </td>
-                      <td> June 16, 2015 </td>
-                    </tr>
+                    {records.map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            <span className="pr-3">
+                              <IoDiamond size={22} />
+                            </span>
+                            {item.name}
+                          </td>
+                          <td style={{ textAlign: "end" }}>{item.id} </td>
+                          <td> {item.username}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
+                <nav className="mt-3 d-flex justify-content-end">
+                  <ul className="pagination">
+                    <li className="page-item">
+                      <a href="#" className="page-link" onClick={prePage}>
+                        Prev
+                      </a>
+                    </li>
+                    {numbers.map((n, i) => (
+                      <li
+                        className={`page-item ${
+                          currentPage === n ? "active" : ""
+                        }`}
+                        key={i}
+                      >
+                        <a
+                          href="#"
+                          className="page-link"
+                          onClick={() => changeCurrentPage(n)}
+                        >
+                          {n}
+                        </a>
+                      </li>
+                    ))}
+                    <li className="page-item">
+                      <a href="#" className="page-link" onClick={nextPage}>
+                        Next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
@@ -168,4 +203,4 @@ const keywords = () => {
   );
 };
 
-export default keywords;
+export default Keywords;

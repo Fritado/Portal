@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { IoMdRadioButtonOn, IoMdRadioButtonOff , IoMdArrowForward} from "react-icons/io";
 import { TiTick } from "react-icons/ti";
 import { LuBadgeHelp } from "react-icons/lu";
+import AuthFooter from "../common/AuthFooter";
 
 const Pricing = () => {
   return (
@@ -87,6 +88,8 @@ const Pricing = () => {
           </span>
         </span>
       </Link>
+
+      <AuthFooter />
     </div>
   );
 };

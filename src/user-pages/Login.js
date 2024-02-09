@@ -79,7 +79,7 @@ const Login = () => {
                 </Form.Group>
                 <button
                   type="submit"
-                  disabled={ !email|| !password}
+                  disabled={!email || !password}
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
                   SIGN IN
@@ -114,11 +114,7 @@ const Login = () => {
               </Form>
             </div>
           </div>
-          <AuthFooter
-            footdec={
-              "© 2024 Copyright Fritado Technologies. All rights reserved"
-            }
-          />
+          <AuthFooter />
         </div>
       </div>
     </div>

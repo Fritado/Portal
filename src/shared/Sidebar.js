@@ -74,7 +74,7 @@ class Sidebar extends Component {
             </div>
             <Collapse in={ this.state.apiChannelsMenuOpen }>
               <ul className="nav flex-column sub-menu">
-              <li className="nav-item"> <Link className={ this.isPathActive('/fb-connect') ? 'nav-link active' : 'nav-link' } to="/fb-connect"><Trans>Connect Fb Account</Trans></Link></li>
+              <li className="nav-item"> <Link className={ this.isPathActive('/fb-connect') ? 'nav-link active' : 'nav-link' } to="/fb-connect"><Trans>Connect Website</Trans></Link></li>
                 <li className="nav-item"> <Link className={ this.isPathActive('/social-media') ? 'nav-link active' : 'nav-link' } to="/social-media"><Trans>Social medias</Trans></Link></li>
                 <li className="nav-item"> <Link className={ this.isPathActive('/email-api') ? 'nav-link active' : 'nav-link' } to="/email-api"><Trans>Email API</Trans></Link></li>
                 <li className="nav-item"> <Link className={ this.isPathActive('/sms-api') ? 'nav-link active' : 'nav-link' } to="/sms-api"><Trans>SMS API</Trans></Link></li>
@@ -100,7 +100,7 @@ class Sidebar extends Component {
           </li>
 
           
-          <li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
+          {/*<li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.formElementsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('formElementsMenuOpen') } data-toggle="collapse">
               <span className="icon-bg"><i className="mdi mdi-format-list-bulleted menu-icon"></i></span>
               <span className="menu-title"><Trans>Form elements</Trans></span>
@@ -111,7 +111,7 @@ class Sidebar extends Component {
                 <li className="nav-item"> <Link className={ this.isPathActive('/form-elements/basic-elements') ? 'nav-link active' : 'nav-link' } to="/form-elements/basic-elements"><Trans>Basic Elements</Trans></Link></li>
               </ul>
             </Collapse>
-          </li>
+    </li>*/}
           <li className="nav-item nav-category"><Trans>Data Representation</Trans></li>
           <li className={ this.isPathActive('/charts') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.chartsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('chartsMenuOpen') } data-toggle="collapse">

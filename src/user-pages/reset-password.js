@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
-import { useHistory , useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
@@ -11,21 +11,24 @@ const ResetPassword = () => {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const {token} = useParams();
+  const { token } = useParams();
 
-  const handelSubmit = async (e) =>{
+  const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-     
       const url = `http://localhost:4000/api/v1/auth/reset-password/${token}`;
-      const res = await axios.post(url , {showPassword,showConfirmPassword, token });
+      const res = await axios.post(url, {
+        showPassword,
+        showConfirmPassword,
+        token,
+      });
       toast.success("Password Reset Successfull");
       history.push("/login");
     } catch (error) {
-      toast.error('This is an error!');
+      toast.error("This is an error!");
       console.log(error);
     }
-  }
+  };
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
@@ -67,8 +70,7 @@ const ResetPassword = () => {
 
                 <button
                   type="submit"
-                  disabled={ !showPassword||
-                    !showConfirmPassword }
+                  disabled={!showPassword || !showConfirmPassword}
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
                   RESET PASSWORD
@@ -81,11 +83,7 @@ const ResetPassword = () => {
               </form>
             </div>
           </div>
-          <AuthFooter
-            footdec={
-              "© 2024 Copyright Fritado Technologies. All rights reserved"
-            }
-          />
+          <AuthFooter />
         </div>
       </div>
     </div>

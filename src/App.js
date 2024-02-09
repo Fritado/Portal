@@ -9,7 +9,6 @@ import Footer from "./shared/Footer";
 import { withTranslation } from "react-i18next";
 
 class App extends Component {
- 
   state = {};
   componentDidMount() {
     this.onRouteChanged();
@@ -37,7 +36,6 @@ class App extends Component {
             {footerComponent}
           </div>
         </div>
-        
       </div>
     );
   }
@@ -47,7 +45,7 @@ class App extends Component {
       this.onRouteChanged();
     }
   }
- 
+
   onRouteChanged() {
     console.log("ROUTE CHANGED");
     const { i18n } = this.props;
@@ -60,20 +58,18 @@ class App extends Component {
       i18n.changeLanguage("en");
     }
     window.scrollTo(0, 0);
-    
-   
+
     const fullPageLayoutRoutes = [
-      
       "/login",
       "/signup",
       "/verify-otp",
       `/reset-password`,
-       "/forgot-password",
-       "/business-domain",
-       "/plan",
-       "/pricing" ,
-       "/plan-info",
-      
+      "/forgot-password",
+      "/business-domain",
+      "/plan",
+      "/pricing",
+      "/pagespeed-insights",
+      "/connect-website",
       "/user-pages/login-2",
       "/user-pages/register-2",
       "/user-pages/lockscreen",
