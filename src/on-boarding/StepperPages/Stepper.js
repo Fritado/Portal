@@ -1,11 +1,7 @@
-// IT will accept a list of components
-// based on the size of the list
-// it will generate steps
-
 import React, { useState } from "react";
 
 const Stepper = ({ list }) => {
-  console.log(list)
+  //console.log(list)
   const [currentStep, setCurrentStep] = useState(0);
   const stepsCount = list.length;
   const steps = [];
@@ -38,7 +34,7 @@ const Stepper = ({ list }) => {
 
   return (
     <section className="stepper">
-      <div className="steps-container">
+      <div className="steps-container mx-auto">
         <div className="steps-wrapper">{steps}</div>
         <div
           className="progress-line"

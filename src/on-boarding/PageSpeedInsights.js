@@ -4,17 +4,33 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { FaFileDownload } from "react-icons/fa";
 import AuthFooter from "../common/AuthFooter";
-import PageSpeedData from "./PageSpeedData";
+import DesktopView from "./DesktopView";
+import MobileView from "./MobileView"
 import { ImMobile } from "react-icons/im";
 import { BsLaptop } from "react-icons/bs";
 
 const PageSpeedInsights = () => {
+  const [activeTab, setActiveTab] = useState('desktop');
   const location = useLocation();
   const pageSpeedData = location.state?.pageSpeedData;
   const time = pageSpeedData.lighthouseResult.fetchTime;
   const domainName = pageSpeedData.id;
-
   //console.log("pageSpeedData:", pageSpeedData);
+
+  const inputTime = new Date(time)
+  const formattedTime = inputTime.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
 
   return (
     <div className="d-flex flex-column">
@@ -33,27 +49,28 @@ const PageSpeedInsights = () => {
       </nav>
       <div style={{ maxWidth: "960px", margin: "auto" }}>
         <div className="d-flex justify-content-between">
-          <h1 className=" text-dark timestamp">{time}</h1>
+          <h1 className=" text-dark timestamp">{formattedTime}</h1>
           <span className="download-Icon">
             <FaFileDownload size={38} />
           </span>
         </div>
         <div className="d-flex mx-auto my-4 justify-content-center">
-          <div className="px-2">
-            <span className="pr-2">
-              <ImMobile size={20} />
+          <div onClick={() => handleTabChange('mobile')} className="px-3 text-dark cursor-pointer">
+            <span className="pr-1">
+              <ImMobile size={23} />
             </span>
               Mobile
           </div>
-          <div className="px-2">
+          <div onClick={() => handleTabChange('desktop')} className="px-3 text-dark cursor-pointer">
             <span className="pr-2">
-              <BsLaptop size={20} />
+              <BsLaptop size={25} />
             </span>
               Desktop
           </div>
         </div>
         <div className="border rounded bg-white text-dark my-3">
-          <PageSpeedData />
+        {activeTab === 'mobile' ? <MobileView /> : <DesktopView />}
+          
         </div>
         {/*<div className="d-flex pagespeed">
         {PageSpeedInsights && (
@@ -63,14 +80,16 @@ const PageSpeedInsights = () => {
         )}
         </div>*/}
       </div>
-      <Link to="/pricing" className="d-flex">
-        <span className="my-4 font-weight-bold d-flex text-muted mx-auto">
-          Next
+    
+        <button className="justify-content-center mx-auto mt-3
+             btn btn-primary border rounded py-2.5 px-3 mx-2  my-4 font-weight-bold">
+        <Link to="/pricing" className="d-flex text-white">Go next
           <span>
             <MdKeyboardDoubleArrowRight />
           </span>
-        </span>
-      </Link>
+          </Link>
+        </button>
+      
       <AuthFooter />
     </div>
   );

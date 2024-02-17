@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Spinner from ".././shared/Spinner";
+import { useDispatch } from 'react-redux';
+import {setSpeedData} from "../slice/PageSpeedSlics"
+ 
 
 const DomainPage = () => {
   const [urlInput, setUrlInput] = useState("");
   const [pageSpeedData, setPageSpeedData] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     //  console.log(e.target.value);
@@ -30,10 +34,11 @@ const DomainPage = () => {
       //console.log("Api response coming", response.data.lighthouseResult.audits);
 
       console.log("response api data", data);
+      //dispatch(setSpeedData)
       setPageSpeedData(data);
       history.push({
         pathname: "/pagespeed-insights",
-        state: { pageSpeedData: data },
+      state: { pageSpeedData: data },
       });
     } catch (error) {
       console.error("Error fetching PageSpeed data:", error);

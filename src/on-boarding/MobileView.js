@@ -1,6 +1,7 @@
 import React from "react";
 import { IoTriangle, IoSquareSharp } from "react-icons/io5";
 import { MdCircle } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 import {
   RiCalendar2Line,
   RiTimerLine,
@@ -9,7 +10,23 @@ import {
 } from "react-icons/ri";
 import { PiDesktopTowerBold, PiGoogleChromeLogoBold } from "react-icons/pi";
 
-const PageSpeedData = () => {
+const MobileView = () => {
+    const location = useLocation();
+    const pageSpeedData = location.state?.pageSpeedData;
+  const audits = pageSpeedData.lighthouseResult.audits;
+  const time = pageSpeedData.lighthouseResult.fetchTime;
+  const inputTime = new Date(time)
+  const formattedTime = inputTime.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+
+  console.log("Mobile view", pageSpeedData);
+
   return (
     <div>
       <div className="mx-auto justify-content-center my-2">
@@ -68,17 +85,22 @@ const PageSpeedData = () => {
               >
                 <span className="pr-3">
                   <IoTriangle color="red" className="icon" />
-                  First Contentful Paint
+                  {audits["first-contentful-paint"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">7.1 s</h2>
+                <h2 className="pl-4 ml-2 pt-1">
+                  {audits["first-contentful-paint"].displayValue}
+                </h2>
               </div>
               <div className="d-flex flex-column mt-1 ">
                 <span>
                   {" "}
                   <IoTriangle color="red" className="icon" />
-                  Largest Contentful Paint
+                  {audits["largest-contentful-paint"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">21.7 s</h2>
+                <h2 className="pl-4 ml-2 pt-1">
+                  {" "}
+                  {audits["largest-contentful-paint"].displayValue}
+                </h2>
               </div>
             </div>
 
@@ -89,26 +111,32 @@ const PageSpeedData = () => {
               >
                 <span className="pr-3">
                   <MdCircle color="rgb(15, 221, 60)" className="icon" />
-                  Total Blocking Time
+                  {audits["total-blocking-time"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">7.1 s</h2>
+                <h2 className="pl-4 ml-2 pt-1">
+                  {" "}
+                  {audits["total-blocking-time"].displayValue}
+                </h2>
               </div>
               <div className="d-flex flex-column mt-1 ">
                 <span>
                   {" "}
                   <MdCircle color="rgb(15, 221, 60)" className="icon" />
-                  Cumulative Layout Shift
+                  {audits["cumulative-layout-shift"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">0.013 s</h2>
+                <h2 className="pl-4 ml-2 pt-1">{audits["cumulative-layout-shift"].displayValue}</h2>
               </div>
             </div>
             <div className="d-flex flex-row border-top px-3 py-2">
               <div className="d-flex flex-column mt-1 ">
                 <span className="pr-3">
                   <IoTriangle color="red" className="icon" />
-                  Speed Index
+                  {audits["speed-index"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">17.1 s</h2>
+                <h2 className="pl-4 ml-2 pt-1">
+                  {" "}
+                  {audits["speed-index"].displayValue}
+                </h2>
               </div>
             </div>
 
@@ -116,7 +144,7 @@ const PageSpeedData = () => {
               <div className="d-flex flex-column px-2 py-2">
                 <span style={{ fontSize: "13px" }}>
                   <RiCalendar2Line size={15} className="icon-sm" />
-                  Captured at 9 Feb 2024, 14:15 GMT+5:30
+                  Captured at {formattedTime}
                 </span>
                 <span style={{ fontSize: "13px" }}>
                   <RiTimerLine size={15} className="icon-sm" />
@@ -151,4 +179,4 @@ const PageSpeedData = () => {
   );
 };
 
-export default PageSpeedData;
+export default MobileView;

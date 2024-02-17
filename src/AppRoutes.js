@@ -14,15 +14,14 @@ import BillingPlans from "./components/BillingPlans";
 import PageSpeedInsights from "./on-boarding/PageSpeedInsights";
 import ConnectWebsite from "./on-boarding/ConnectWebsite"
 
+
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 
 const BasicTable = lazy(() => import("./tables/BasicTable"));
 
 const ChartJs = lazy(() => import("./charts/ChartJs"));
-
 const Error404 = lazy(() => import("./error-pages/Error404"));
 const Error500 = lazy(() => import("./error-pages/Error500"));
-
 /******************************************************************* */
 const Login = lazy(() => import("./user-pages/Login"));
 const Register1 = lazy(() => import("./user-pages/Register"));
@@ -67,6 +66,7 @@ class AppRoutes extends Component {
           <Route path="/add-keyword" component={AddKeyword} />
           <Route path="/billing-plan" component={BillingPlans} />
           <Route path="/connect-website" component={ConnectWebsite} />
+        
 
           <Redirect to="/dashboard" />
         </Switch>

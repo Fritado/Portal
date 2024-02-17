@@ -8,7 +8,20 @@ import AuthFooter from "../common/AuthFooter";
 
 const Pricing = () => {
   return (
-    <div className="d-flex flex-column mt-5">
+    <div className="d-flex flex-column mt-2">
+       <nav className="d-flex flex-row justify-content-between px-3 pb-2">
+        <div className="brand-logo">
+          <img
+            src={require("../assets/images/logo2.png")}
+            alt="logo"
+            className="d-flex"
+            style={{ height: "3rem" }}
+          />
+        </div>
+        <div className="">
+          <span>Hello Name Here </span>
+        </div>
+      </nav>
       <div className="d-flex mx-auto my-4">
         <div className="bg-white">
           <div className="d-flex flex-row justify-content-between pricing ">
@@ -80,15 +93,7 @@ const Pricing = () => {
         </div>
       </div>
 
-      <Link to="/plan" className="d-flex">
-        <span className="my-4 font-weight-bold d-flex text-muted mx-auto">
-          Next
-          <span>
-            <MdKeyboardDoubleArrowRight />
-          </span>
-        </span>
-      </Link>
-
+      
       <AuthFooter />
     </div>
   );

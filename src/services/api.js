@@ -10,4 +10,3 @@ export const endpoints = {
   RESETPASSWORD_API: BASE_URL + "/auth//reset-password",
 };
 
-//

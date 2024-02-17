@@ -4,13 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./i18n";
 import { Provider } from "react-redux";
-import rootReducer from "./reducer";
-import { configureStore } from "@reduxjs/toolkit";
+import store from "./reducer/Store";
 import { Toaster } from "react-hot-toast";
 
-const store = configureStore({
-  reducer: rootReducer,
-});
 
 ReactDOM.render(
   <Provider store={store}>
