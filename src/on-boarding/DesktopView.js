@@ -15,17 +15,18 @@ const DesktopView = () => {
   const pageSpeedData = location.state?.pageSpeedData;
   const audits = pageSpeedData.lighthouseResult.audits;
   const time = pageSpeedData.lighthouseResult.fetchTime;
+  const imageUrl =pageSpeedData.lighthouseResult.fullPageScreenshot.screenshot.data;
+  
 
-  const inputTime = new Date(time)
-  const formattedTime = inputTime.toLocaleString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
+  const inputTime = new Date(time);
+  const formattedTime = inputTime.toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
   });
- 
 
   //console.log("DeskTop view", pageSpeedData);
 
@@ -69,7 +70,7 @@ const DesktopView = () => {
 
           <div className="d-flex box-style border-left">
             <img
-              src={require("../assets/images/logo2.png")}
+              src={imageUrl}
               alt="logo"
               className="d-flex p-3 mx-auto page-img border rounded"
             />
@@ -126,7 +127,9 @@ const DesktopView = () => {
                   <MdCircle color="rgb(15, 221, 60)" className="icon" />
                   {audits["cumulative-layout-shift"].title}
                 </span>
-                <h2 className="pl-4 ml-2 pt-1">{audits["cumulative-layout-shift"].displayValue}</h2>
+                <h2 className="pl-4 ml-2 pt-1">
+                  {audits["cumulative-layout-shift"].displayValue}
+                </h2>
               </div>
             </div>
             <div className="d-flex flex-row border-top px-3 py-2">

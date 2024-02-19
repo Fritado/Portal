@@ -3,42 +3,40 @@ import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Spinner from ".././shared/Spinner";
-import { useDispatch } from 'react-redux';
-import {setSpeedData} from "../slice/PageSpeedSlics"
- 
 
 const DomainPage = () => {
   const [urlInput, setUrlInput] = useState("");
   const [pageSpeedData, setPageSpeedData] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const handleOnChange = (e) => {
     //  console.log(e.target.value);
-    setUrlInput(e.target.value);
+    const inputPrefix = e.target.value.trim(); //seo.com
+
+    setUrlInput(
+      inputPrefix.startsWith("https://") ? inputPrefix.slice(8) : inputPrefix
+    );
   };
   const fetchData = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const apiKey = "AIzaSyCHCEQO7ge4Rs6ABVtlcOWiejNFp5T9LWI";
     const apiUrl = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
+    const modifiedUrlInput = `https://${urlInput}`; //https://seo.com
+
+    const apiKey = "AIzaSyCHCEQO7ge4Rs6ABVtlcOWiejNFp5T9LWI";
     const dynamicEndpoint = `${apiUrl}?url=${encodeURIComponent(
-      urlInput
+      modifiedUrlInput
     )}&key=${apiKey}`;
     try {
       const response = await fetch(dynamicEndpoint);
-      //console.log("url", dynamicEndpoint);
-      const data = await response.json();
-      // const data = await response.data.lighthouseResult.audits;
-      //console.log("Api response coming", response.data.lighthouseResult.audits);
 
-      console.log("response api data", data);
-      //dispatch(setSpeedData)
+      const data = await response.json();
+
       setPageSpeedData(data);
       history.push({
         pathname: "/pagespeed-insights",
-      state: { pageSpeedData: data },
+        state: { pageSpeedData: data },
       });
     } catch (error) {
       console.error("Error fetching PageSpeed data:", error);
@@ -46,6 +44,7 @@ const DomainPage = () => {
       setLoading(false);
     }
   };
+
   return (
     <div>
       <div className="mt-2 d-flex align-items-center mx-auto auth px-0">
@@ -73,14 +72,17 @@ const DomainPage = () => {
                   customer reach? Let's begin!
                 </h6>
                 <form className="pt-3">
-                  <div className="form-group">
+                  <div className="form-group d-flex flex-row">
+                  <div className="d-flex bg-primary align-items-center px-2 text-center">
+                      <span className="text-white">https://</span>
+                    </div>
                     <input
                       required
                       type="text"
                       name="urlInput"
                       value={urlInput}
                       onChange={handleOnChange}
-                      placeholder="https://fritado.com"
+                      placeholder="fritado.com"
                       className="form-control form-control-lg"
                       id="exampleInputPassword1"
                     />

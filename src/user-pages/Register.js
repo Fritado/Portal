@@ -36,6 +36,7 @@ const Register = () => {
   //handle from submission
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+   
     try {
       const url = "http://localhost:4000/api/v1/auth/signup";
       const { formData: res } = await axios.post(url, formData);
@@ -48,10 +49,10 @@ const Register = () => {
       console.log(error);
     }
 
-    const signupData = { ...formData };
+    const signupData = { ...formData};
 
     //setting signup data to store to be used after otp verification
-    //dispatch(setSignupData(signupData));
+     dispatch(setSignupData(signupData));
 
     //send otp to user for verification
     //dispatch(sendOtp(formData.email));

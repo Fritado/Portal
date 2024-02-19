@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // data required
 const initialState = {
+  //user: user ? user : null,
   signupData: null,
-  
+  //token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
+  //loading: false,
+ 
 };
-/**token: localStorage.getItem("token")
-    ? JSON.parse(localStorage.getItem("token"))
-    : null, */
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -16,12 +17,15 @@ const authSlice = createSlice({
     setSignupData(state, value) {
       state.signupData = value.payload;
     },
-    setToken(state, value) {
-      state.token = value.payload;
-    },
+    // setLoading(state, value) {
+    //   state.loading = value.payload;
+    // },
+    // setToken(state, value) {
+    //   state.token = value.payload;
+    // },
   },
 });
 
-export const {setSignupData , setToken} = authSlice.actions;
+export const { setSignupData, setToken } = authSlice.actions;
 
 export default authSlice.reducer;
