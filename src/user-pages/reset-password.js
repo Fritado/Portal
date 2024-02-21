@@ -4,6 +4,8 @@ import AuthFooter from "../common/AuthFooter";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useDispatch } from 'react-redux';
+import { setToken } from "../slice/tokenSlice"
 
 //this page will open after hiting url from email.
 
@@ -12,16 +14,20 @@ const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { token } = useParams();
+  const dispatch = useDispatch();
 
   const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `http://localhost:4000/api/v1/auth/reset-password/${token}`;
+      const url = `api/auth/reset-password/${token}`;
       const res = await axios.post(url, {
         showPassword,
         showConfirmPassword,
         token,
       });
+      console.log(res);
+      
+     
       toast.success("Password Reset Successfull");
       history.push("/login");
     } catch (error) {
@@ -70,6 +76,7 @@ const ResetPassword = () => {
 
                 <button
                   type="submit"
+                  onClick={handelSubmit}
                   disabled={!showPassword || !showConfirmPassword}
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >

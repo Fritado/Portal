@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import AuthFooter from "../common/AuthFooter";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { loginUser } from "../slice/authSlice";
 
 const Login = () => {
   const history = useHistory();
@@ -24,18 +25,19 @@ const Login = () => {
   const handelOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:4000/api/v1/auth/login";
+      const url = "api/auth/login";
       const { formData: res } = await axios.post(url, formData);
       toast.success("Login Successfull");
-      localStorage.setItem("token", res);
+      //console.log(formData);
+      localStorage.setItem("token", formData);
       history.push("/business-domain");
-      console.log(res);
+      dispatch(loginUser(formData))
     } catch (error) {
       toast.error("This is an error!");
       console.log(error);
     }
-    //console.log(formData);
-    //dispatch(login(email, password, navigate));
+   
+    
   };
   return (
     <div>

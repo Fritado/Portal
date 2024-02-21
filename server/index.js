@@ -3,7 +3,7 @@ const app = express();
 const database = require("./config/database")
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/user");
-
+const scrapeRoute = require("./routes/scrape")
 const cors = require("cors");
 
 dotenv.config();
@@ -26,8 +26,8 @@ app.use(express.urlencoded({
 
 //routes
 //http://localhost:4000/api/fritado
-//app.use("/api/fritado/auth" , userRoutes);
-app.use("/api/v1/auth" , userRoutes);
+app.use("/api/auth" , userRoutes);
+app.use("/api/scrape" , scrapeRoute );
 
 //default routes
 app.get("/" , (req,res) =>{

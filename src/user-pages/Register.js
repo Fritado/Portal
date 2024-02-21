@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-//import { sendOtp } from "../services/operations/authApi";
-import { setSignupData } from "../slice/authSlice";
+import { loginUser } from "../slice/authSlice";
 import AuthFooter from "../common/AuthFooter";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -38,9 +37,10 @@ const Register = () => {
     e.preventDefault();
    
     try {
-      const url = "http://localhost:4000/api/v1/auth/signup";
+      const url = "api/auth/signup";
       const { formData: res } = await axios.post(url, formData);
       toast.success("Login Successfull");
+      console.log(res);
 
       history.push("/login");
       // console.log(res);
@@ -52,10 +52,9 @@ const Register = () => {
     const signupData = { ...formData};
 
     //setting signup data to store to be used after otp verification
-     dispatch(setSignupData(signupData));
-
-    //send otp to user for verification
-    //dispatch(sendOtp(formData.email));
+     dispatch(loginUser(signupData));
+     console.log(signupData)
+    
     //Reset form data
     setFormData({
       firstname: "",

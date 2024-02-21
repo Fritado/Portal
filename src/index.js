@@ -5,12 +5,9 @@ import App from "./App";
 import "./i18n";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import rootReducer from "./reducer"
-import {configureStore} from "@reduxjs/toolkit";
+import {store} from "./reducer/Store"
 
-const store = configureStore({
-  reducer:rootReducer,
-});
+
 
 ReactDOM.render(
   <Provider store={store}>

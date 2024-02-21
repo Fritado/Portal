@@ -20,7 +20,7 @@ exports.resetPasswordToken = async (req, res) => {
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
       {
-        token: token,
+        resetPasswordToken: token,
         resetPasswordExpires: Date.now() + 3600000,
       },
       { new: true }
@@ -39,6 +39,7 @@ exports.resetPasswordToken = async (req, res) => {
       success: true,
       message:
         "Email Sent Successfully, Please Check Your Email to Continue Further",
+      data: updatedDetails,
     });
   } catch (error) {
     return res.json({
@@ -60,7 +61,7 @@ exports.resetPassword = async (req, res) => {
       });
     }
 
-    const userDetails = await User.findOne({ token: token });
+    const userDetails = await User.findOne({ resetPasswordToken: token });
     if (!userDetails) {
       return res.json({
         success: false,

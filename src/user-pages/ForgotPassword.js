@@ -4,17 +4,22 @@ import AuthFooter from "../common/AuthFooter";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useDispatch } from 'react-redux';
+import { setToken } from "../slice/tokenSlice"
 
 const ForgotPassword = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+  const dispatch = useDispatch();
 
   const handelOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:4000/api/v1/auth/reset-password-token";
+      const url = "api/auth/reset-password-token";
       const res = await axios.post(url, { email });
+      console.log(res);
+      dispatch(setToken(res.data.data.token));
       setEmailSent(true);
       toast.success("Email sent  Successfull");
     } catch (error) {

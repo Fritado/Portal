@@ -20,9 +20,9 @@ const StepTwo = ({ onPrev, onNext }) => {
         </div>
         <div className="mx-3 my-7">
           {WebsiteProviderList.map((ele) => (
-            <div>
+            <div key={ele.id}>
               <ul>
-                <label key={ele.id} className="">
+                <label className="">
                   <input
                     type="radio"
                     name="provider"

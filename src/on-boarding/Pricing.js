@@ -85,9 +85,11 @@ const Pricing = () => {
                   <strong className="price">$49.99 </strong> /mo (billed annually)
                 </span>
               </div>
+                <Link to="/payment"> 
               <button className="price-btn" style={{backgroundColor:"rgba(47, 130, 162, 0.859)"}}>
                 Start free trial <span><IoMdArrowForward size={20}/></span>
               </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -66,7 +66,7 @@ class App extends Component {
       `/reset-password`,
       "/forgot-password",
       "/business-domain",
-      "/plan",
+      "/payment",
       "/pricing",
       "/pagespeed-insights",
       "/connect-website",

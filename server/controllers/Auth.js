@@ -110,6 +110,13 @@ exports.signup = async (req, res) => {
 
     //hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+    //entry created in DB of a Profile of user
+    // const profileDetails = await Profile.create({
+    //   gender: null,
+    //   dateOfBirth: null,
+    //   about: null,
+    //   contactNumber: null,
+    // });
 
     //Create the user
     const newUser = await User.create({
@@ -117,6 +124,7 @@ exports.signup = async (req, res) => {
       lastname,
       email,
       password: hashedPassword,
+      //additionalDetails: profileDetails._id
     });
     return res.status(200).json({
       success: true,
@@ -157,17 +165,19 @@ exports.login = async (req, res) => {
 
     //generate JWT token and comapre password
     if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign(
-        { email: user.email, id: user._id },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "24h",
-        }
-      );
+      const payload = {
+        email: user.email,
+        id: user._id,
+        accountType: user.accountType,
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+      });
 
       //save the token to user document in db
       user.token = token;
       user.password = undefined;
+
       // Set cookie for token and return success response
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
@@ -255,3 +265,5 @@ exports.changePassword = async (req, res) => {
     });
   }
 };
+
+/***Logout */

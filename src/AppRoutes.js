@@ -12,8 +12,7 @@ import Competetors from "./on-boarding-menu/Competetors";
 import AddKeyword from "./on-boarding-menu/AddKeyword";
 import BillingPlans from "./components/BillingPlans";
 import PageSpeedInsights from "./on-boarding/PageSpeedInsights";
-import ConnectWebsite from "./on-boarding/ConnectWebsite"
-
+import ConnectWebsite from "./on-boarding/ConnectWebsite";
 
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 
@@ -53,7 +52,7 @@ class AppRoutes extends Component {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/business-domain" component={DomainPage} />
           <Route path="/pricing" component={Pricing} />
-          <Route path="/plan" component={selectPlan} />
+          <Route path="/payment" component={selectPlan} />
           <Route path="/pagespeed-insights" component={PageSpeedInsights} />
           <Route path="/profile" component={Profile} />
           <Route path="/fb-connect" component={FbConnect} />
@@ -66,9 +65,8 @@ class AppRoutes extends Component {
           <Route path="/add-keyword" component={AddKeyword} />
           <Route path="/billing-plan" component={BillingPlans} />
           <Route path="/connect-website" component={ConnectWebsite} />
-        
 
-          <Redirect to="/dashboard" />
+          <Redirect to="/login" />
         </Switch>
       </Suspense>
     );

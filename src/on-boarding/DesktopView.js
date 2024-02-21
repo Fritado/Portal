@@ -9,6 +9,8 @@ import {
 } from "react-icons/ri";
 import { PiDesktopTowerBold, PiGoogleChromeLogoBold } from "react-icons/pi";
 import { useLocation } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const DesktopView = () => {
   const location = useLocation();
@@ -36,9 +38,26 @@ const DesktopView = () => {
         {/**preogress */}
         <div className="d-flex flex-row progress-box ">
           <div className="d-flex flex-column mx-auto box-style">
-            <div className="progress-bar mx-auto">
-              <span className="progress-value">0%</span>
+          <div style={{ width: '200px', margin: 'auto' }}>
+            <CircularProgressbar
+              value={audits["speed-index"].displayValue}
+              text="Speed Index"
+              styles={buildStyles({
+                rotation: 0,
+                strokeLinecap: 'round',
+                textSize: '8px',
+                pathTransitionDuration: 0.5,
+                textColor: '#3E98C7',
+                pathColor: '#3E98C7',
+                trailColor: '#d6d6d6',
+              })}
+            />
+            
+            
             </div>
+            {/*<div className="progress-bar mx-auto">
+              <span className="progress-value">0%</span>
+            </div>*/}
             <h3 className="text-center mt-3">Perfomance</h3>
             <p className="text-center mt-1 ">
               Values are estimated and may vary.{" "}

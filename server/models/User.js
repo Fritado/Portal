@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-   
+
     email: {
       type: String,
       required: true,
@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema(
     token: {
       type: String,
     },
+    // additionalDetails: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   //required: true,
+    //   ref: "Profile",
+    // },
     resetPasswordExpires: {
       type: Date,
     },

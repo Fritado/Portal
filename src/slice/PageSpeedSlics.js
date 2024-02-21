@@ -1,19 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    pageSpeedData: null,
-  };
+  domainName: null,
+};
 
-  const pageSpeedSlice = createSlice({
-    name:"pageSpeed",
-    initialState,
-    reducers:{
-        setSpeedData:(state , action) =>{
-        state.pageSpeedData = action.payload
-        }
-    }
-  })
+const domainSlice = createSlice({
+  name: 'domain',
+  initialState,
+  reducers: {
+    setDomainName: (state, action) => {
+      state.domainName = action.payload;
+    },
+  },
+});
 
-  export const {setSpeedData} = pageSpeedSlice.actions;
-  export default pageSpeedSlice.reducer
+export const { setDomainName } = domainSlice.actions;
+export const selectDomainName = (state) => state.domain.domainName;
+
+export default domainSlice.reducer;

@@ -73,7 +73,7 @@ const DomainPage = () => {
                 </h6>
                 <form className="pt-3">
                   <div className="form-group d-flex flex-row">
-                  <div className="d-flex bg-primary align-items-center px-2 text-center">
+                    <div className="d-flex bg-primary align-items-center px-2 text-center">
                       <span className="text-white">https://</span>
                     </div>
                     <input
