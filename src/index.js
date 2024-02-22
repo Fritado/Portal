@@ -5,9 +5,7 @@ import App from "./App";
 import "./i18n";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import {store} from "./reducer/Store"
-
-
+import { store } from "./reducer/Store";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,4 +16,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-

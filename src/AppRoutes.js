@@ -13,8 +13,8 @@ import AddKeyword from "./on-boarding-menu/AddKeyword";
 import BillingPlans from "./components/BillingPlans";
 import PageSpeedInsights from "./on-boarding/PageSpeedInsights";
 import ConnectWebsite from "./on-boarding/ConnectWebsite";
-
-const Dashboard = lazy(() => import("./dashboard/Dashboard"));
+import ProtectedRoute from "./AuthRotes/ProtectedRoute";
+import Dashboard from "./dashboard/Dashboard";
 
 const BasicTable = lazy(() => import("./tables/BasicTable"));
 
@@ -36,36 +36,38 @@ class AppRoutes extends Component {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-
-          <Route path="/tables/basic-table" component={BasicTable} />
-
-          <Route path="/charts/chart-js" component={ChartJs} />
-
-          <Route path="/error-pages/error-404" component={Error404} />
-          <Route path="/error-pages/error-500" component={Error500} />
-
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register1} />
           <Route path="/verify-otp" component={VerifyOtp} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path="/business-domain" component={DomainPage} />
-          <Route path="/pricing" component={Pricing} />
-          <Route path="/payment" component={selectPlan} />
-          <Route path="/pagespeed-insights" component={PageSpeedInsights} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/fb-connect" component={FbConnect} />
-          <Route path="/email-api" component={Email} />
-          <Route path="/sms-api" component={Sms} />
-          <Route path="/social-media" component={SocialMedia} />
-          <Route path="/business-profile" component={BusinessProfile} />
-          <Route path="/keywords" component={keywords} />
-          <Route path="/competetor" component={Competetors} />
-          <Route path="/add-keyword" component={AddKeyword} />
-          <Route path="/billing-plan" component={BillingPlans} />
-          <Route path="/connect-website" component={ConnectWebsite} />
-
+          
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/tables/basic-table" component={BasicTable} />
+          <ProtectedRoute path="/charts/chart-js" component={ChartJs} />
+          <ProtectedRoute path="/error-pages/error-404" component={Error404} />
+          <ProtectedRoute path="/error-pages/error-500" component={Error500} />
+          <ProtectedRoute path="/business-domain" component={DomainPage} />
+          <ProtectedRoute path="/pricing" component={Pricing} />
+          <ProtectedRoute path="/payment" component={selectPlan} />
+          <ProtectedRoute
+            path="/pagespeed-insights"
+            component={PageSpeedInsights}
+          />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute path="/fb-connect" component={FbConnect} />
+          <ProtectedRoute path="/email-api" component={Email} />
+          <ProtectedRoute path="/sms-api" component={Sms} />
+          <ProtectedRoute path="/social-media" component={SocialMedia} />
+          <ProtectedRoute
+            path="/business-profile"
+            component={BusinessProfile}
+          />
+          <ProtectedRoute path="/keywords" component={keywords} />
+          <ProtectedRoute path="/competetor" component={Competetors} />
+          <ProtectedRoute path="/add-keyword" component={AddKeyword} />
+          <ProtectedRoute path="/billing-plan" component={BillingPlans} />
+          <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
           <Redirect to="/login" />
         </Switch>
       </Suspense>
