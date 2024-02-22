@@ -20,7 +20,7 @@ exports.resetPasswordToken = async (req, res) => {
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
       {
-        resetPasswordToken: token,
+        token: token,
         resetPasswordExpires: Date.now() + 3600000,
       },
       { new: true }
@@ -61,7 +61,7 @@ exports.resetPassword = async (req, res) => {
       });
     }
 
-    const userDetails = await User.findOne({ resetPasswordToken: token });
+    const userDetails = await User.findOne({ token: token });
     if (!userDetails) {
       return res.json({
         success: false,

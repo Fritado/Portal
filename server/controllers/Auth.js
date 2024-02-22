@@ -168,12 +168,11 @@ exports.login = async (req, res) => {
       const payload = {
         email: user.email,
         id: user._id,
-        accountType: user.accountType,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
-
+     // console.log("Generated Token\n", token);
       //save the token to user document in db
       user.token = token;
       user.password = undefined;
@@ -267,3 +266,17 @@ exports.changePassword = async (req, res) => {
 };
 
 /***Logout */
+exports.logout = async (req, res) => {
+  const cookies = req.headers.cookie;
+  const prevToken = cookies.split("=")[1];
+  if (!prevToken) {
+    return res.status(404).json({ message: "No token found" });
+  }
+  jwt.verify(String(prevToken), process.env.JWT_SECRET_KEY, (error, user) => {
+    if (error) {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+    res.clearCookie(String(user.id));
+    return res.status(200).json({ message: "Successfully logged out" });
+  });
+};
