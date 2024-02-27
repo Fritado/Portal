@@ -16,16 +16,17 @@ exports.resetPasswordToken = async (req, res) => {
     }
 
     const token = crypto.randomBytes(20).toString("hex");
+    
 
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
       {
-        token: token,
+        token: token ,
         resetPasswordExpires: Date.now() + 3600000,
       },
       { new: true }
     );
-    console.log("DETAILS", updatedDetails);
+   // console.log("DETAILS", updatedDetails);
 
     const url = `http://localhost:3000/reset-password/${token}`;
 
@@ -51,6 +52,7 @@ exports.resetPasswordToken = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
+  console.log(req.body)
   try {
     const { password, confirmPassword, token } = req.body;
 
@@ -61,18 +63,17 @@ exports.resetPassword = async (req, res) => {
       });
     }
 
-    const userDetails = await User.findOne({ token: token });
+    const userDetails = await User.findOne({ token:token});
     if (!userDetails) {
       return res.json({
         success: false,
-        message: "Token is invalid",
+        message: "Token is invalid , user not find",
       });
     }
 
-    if (!(userDetails.resetPasswordExpires > Date.now())) {
+    if (Date.now() > userDetails.resetPasswordExpires) {
       return res.status(403).json({
         success: false,
-        //error: error.message,
         message: `Token is Expired, Please Regenerate Your Token`,
       });
     }
@@ -89,10 +90,10 @@ exports.resetPassword = async (req, res) => {
       message: `Password Reset Successful`,
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error in resetPassword:", error);
     return res.status(500).json({
       success: false,
-      message: "error while reset password",
+      message: "Error while resetting the password",
     });
   }
 };

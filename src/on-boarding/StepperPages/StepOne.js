@@ -4,7 +4,7 @@ import { TfiControlBackward ,TfiControlForward } from "react-icons/tfi";
 const StepOne = ({ onPrev, onNext }) => {
   return (
     <div>
-      <span className="d-flex flex-row">Connect your website </span>
+     {/* <span className="d-flex flex-row">Connect your website </span>*/}
       <div className="d-flex flex-column mt-4  justify-content-center mx-auto bg-white" style={{maxWidth:"655px"}}>
         <div className="d-flex flex-column py-4 px-3">
           <h2 className="">Watch our guide</h2>

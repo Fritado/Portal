@@ -23,14 +23,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    additionalDetails: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "Profile",
+		},
     token: {
       type: String,
     },
-    // additionalDetails: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   //required: true,
-    //   ref: "Profile",
-    // },
     resetPasswordExpires: {
       type: Date,
     },

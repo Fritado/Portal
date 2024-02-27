@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const userRoutes = require("./routes/user");
 const scrapeRoute = require("./routes/scrape")
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -13,7 +14,9 @@ const PORT = process.env.PORT || 4000;
 database.connect();
 
 //middleware
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+app.use(cookieParser());
 app.use(
 	cors({
 		origin:"http://localhost:3000",

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 const Otp = require("../models/OTP");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
@@ -111,20 +112,20 @@ exports.signup = async (req, res) => {
     //hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     //entry created in DB of a Profile of user
-    // const profileDetails = await Profile.create({
-    //   gender: null,
-    //   dateOfBirth: null,
-    //   about: null,
-    //   contactNumber: null,
-    // });
+    const profileDetails = await Profile.create({
+      about: null,
+      contactNumber: null,
+    });
 
     //Create the user
     const newUser = await User.create({
       firstname,
       lastname,
       email,
+     
       password: hashedPassword,
-      //additionalDetails: profileDetails._id
+      additionalDetails: profileDetails._id,
+     // image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
     });
     return res.status(200).json({
       success: true,
@@ -153,7 +154,7 @@ exports.login = async (req, res) => {
       });
     }
     // Find user with provided email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("additionalDetails");
 
     //if User nor found with this provided email
     if (!user) {
@@ -172,10 +173,11 @@ exports.login = async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
-     // console.log("Generated Token\n", token);
+      // console.log("Generated Token\n", token);
       //save the token to user document in db
       user.token = token;
       user.password = undefined;
+      
 
       // Set cookie for token and return success response
       const options = {
@@ -265,18 +267,3 @@ exports.changePassword = async (req, res) => {
   }
 };
 
-/***Logout */
-exports.logout = async (req, res) => {
-  const cookies = req.headers.cookie;
-  const prevToken = cookies.split("=")[1];
-  if (!prevToken) {
-    return res.status(404).json({ message: "No token found" });
-  }
-  jwt.verify(String(prevToken), process.env.JWT_SECRET_KEY, (error, user) => {
-    if (error) {
-      return res.status(400).json({ message: "Invalid token" });
-    }
-    res.clearCookie(String(user.id));
-    return res.status(200).json({ message: "Successfully logged out" });
-  });
-};

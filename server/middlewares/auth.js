@@ -1,38 +1,50 @@
-const jwt = require("jsonwebtoken")
-const dotenv = require("dotenv")
-const User = require("../models/User")
-dotenv.config()
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const User = require("../models/User");
 
+//auth
 exports.auth = async (req, res, next) => {
   try {
+    //console.log("Request Object:", req);
+    console.log("BEFORE ToKEN EXTRACTION");
+    //extract token
+
     const token =
       req.cookies.token ||
       req.body.token ||
-      req.header("Authorization").replace("Bearer ", "")
+      req.header("Authorization").replace("Bearer ", "");
+    
+    //const token = req.cookies.token;
+    console.log("AFTER ToKEN EXTRACTION");
 
-    // If JWT is missing, return 401 Unauthorized response
+    //if token missing, then return response
     if (!token) {
-      return res.status(401).json({ success: false, message: `Token Missing` })
+      return res.status(401).json({
+        success: false,
+        message: "TOken is missing",
+      });
     }
 
+    //verify the token
     try {
-      // Verifying the JWT using the secret key stored in environment variables
-      const decode = await jwt.verify(token, process.env.JWT_SECRET)
-      console.log(decode)
-      // Storing the decoded JWT payload in the request object for further use
-      req.user = decode
-    } catch (error) {
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decode);
+      req.user = decode;
+    } catch (err) {
+      //verification - issue
       return res.status(401).json({
         success: false,
         message: "token is invalid",
-      })
+      });
     }
-    // If JWT is valid, move on to the next middleware or request handler
-    next()
+    next();
   } catch (error) {
+    console.log(error);
     return res.status(401).json({
       success: false,
-      message: `Something Went Wrong While Validating the Token`,
-    })
+      message: "Something went wrong while validating the token",
+    });
   }
-}
+};
+
+

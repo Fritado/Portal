@@ -4,13 +4,13 @@ const puppeteer = require("puppeteer");
 
 exports.webScrape = async (req, res) => {
   try {
-    console.log("Incoming request body:", req.body);
+    //console.log("Incoming request body:", req.body);
     const { domainName } = req.body;
     if (!domainName) {
       return res.status(400).json({ error: "URL is required" });
     }
     const scrapedData = await axios.get(domainName, { timeout: 15000 });
-    console.log( "scrapedData" , scrapedData);
+    //console.log( "scrapedData" , scrapedData);
     const htmlContent = scrapedData.data;
    
     const browser = await puppeteer.launch();

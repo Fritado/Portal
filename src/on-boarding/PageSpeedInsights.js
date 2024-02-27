@@ -7,9 +7,9 @@ import DesktopView from "./DesktopView";
 import MobileView from "./MobileView";
 import { ImMobile } from "react-icons/im";
 import { BsLaptop } from "react-icons/bs";
-import Navbar from "../common/Navbar";
 import { setDomainName } from "../slice/PageSpeedSlics";
 import { useDispatch } from 'react-redux';
+import Header from "../common/Header";
 
 const PageSpeedInsights = () => {
   const [activeTab, setActiveTab] = useState("desktop");
@@ -37,21 +37,9 @@ const PageSpeedInsights = () => {
 
   return (
     <div className="d-flex flex-column">
-      <Navbar />
-      {/*<nav className="d-flex flex-row justify-content-between mt-2 px-3 pb-2">
-        <div className="brand-logo">
-          <img
-            src={require("../assets/images/logo2.png")}
-            alt="logo"
-            className="d-flex"
-            style={{ height: "3rem" }}
-          />
-        </div>
-        <div className="">
-          <span>Name Here </span>
-        </div>
-  </nav>*/}
-      <div style={{ maxWidth: "960px", margin: "auto" }}>
+      <Header />
+     
+      <div style={{ maxWidth: "960px", margin: "auto" }} className="mt-4 pt-2">
           <h1 className="pb-1 text-dark text-center">{formattedTime}</h1>
         <div className="d-flex mx-auto my-2 justify-content-center ">
           {/*<div

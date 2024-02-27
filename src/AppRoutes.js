@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from "react";
+import React, { Component, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Spinner from "./shared/Spinner";
 import Profile from "./components/Profile";
@@ -15,21 +15,26 @@ import PageSpeedInsights from "./on-boarding/PageSpeedInsights";
 import ConnectWebsite from "./on-boarding/ConnectWebsite";
 import ProtectedRoute from "./AuthRotes/ProtectedRoute";
 import Dashboard from "./dashboard/Dashboard";
+import BasicTable from "./tables/BasicTable";
+import ChartJs from "./charts/ChartJs";
+import Error404 from "./error-pages/Error404";
+import Error500 from "./error-pages/Error500";
+import Login from "./user-pages/Login";
+import Register1 from "./user-pages/Register";
+import ResetPassword from "./user-pages/reset-password";
+import ForgotPassword from "./user-pages/ForgotPassword";
+import DomainPage from "./on-boarding/DomainPage";
+import Pricing from "./on-boarding/Pricing";
+import selectPlan from "./on-boarding/SelectPlan";
+import VerifyOtp from "./user-pages/VerifyOtp";
+import OnSiteCode from "./onSite/OnSiteCode";
+import OnSitePageSpeed from "./onSite/OnSitePageSpeed";
+import Overview from "./onSite/Overview";
+import BlogAutomation from "./ContentMarketing/BlogAutomation";
+import BlogOverView from "./ContentMarketing/BlogOverView";
+import BlogHistory from "./ContentMarketing/BlogHistory";
+import HelpCenterPage from "./HelpCenter/HelpCenterPage";
 
-const BasicTable = lazy(() => import("./tables/BasicTable"));
-
-const ChartJs = lazy(() => import("./charts/ChartJs"));
-const Error404 = lazy(() => import("./error-pages/Error404"));
-const Error500 = lazy(() => import("./error-pages/Error500"));
-/******************************************************************* */
-const Login = lazy(() => import("./user-pages/Login"));
-const Register1 = lazy(() => import("./user-pages/Register"));
-const ResetPassword = lazy(() => import("./user-pages/reset-password"));
-const ForgotPassword = lazy(() => import("./user-pages/ForgotPassword"));
-const DomainPage = lazy(() => import("./on-boarding/DomainPage"));
-const Pricing = lazy(() => import("./on-boarding/Pricing"));
-const selectPlan = lazy(() => import("./on-boarding/SelectPlan"));
-const VerifyOtp = lazy(() => import("./user-pages/VerifyOtp"));
 
 class AppRoutes extends Component {
   render() {
@@ -39,9 +44,8 @@ class AppRoutes extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register1} />
           <Route path="/verify-otp" component={VerifyOtp} />
-          <Route path="/reset-password" component={ResetPassword} />
+          <Route path="/reset-password/:token" component={ResetPassword} />
           <Route path="/forgot-password" component={ForgotPassword} />
-          
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <ProtectedRoute path="/tables/basic-table" component={BasicTable} />
           <ProtectedRoute path="/charts/chart-js" component={ChartJs} />
@@ -68,6 +72,14 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/add-keyword" component={AddKeyword} />
           <ProtectedRoute path="/billing-plan" component={BillingPlans} />
           <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
+          <ProtectedRoute path="/onsite-code" component={OnSiteCode} />
+          <ProtectedRoute path="/pagespeed" component={OnSitePageSpeed} />
+          <ProtectedRoute path="/overview" component={Overview} />
+          <ProtectedRoute path="/blog-automation" component={BlogAutomation} />
+          <ProtectedRoute path="/blog-overview" component={BlogOverView} />
+          <ProtectedRoute path="/blog-history" component={BlogHistory} />
+          {/* Help center routes */}
+          <ProtectedRoute path="/help-center-page" component={HelpCenterPage} />
           <Redirect to="/login" />
         </Switch>
       </Suspense>

@@ -28,7 +28,7 @@ const StepThree = ({ onPrev, onNext }) => {
   }
   return (
     <div>
-      <span className="d-flex flex-row">Explore your dashboard</span>
+      {/*<span className="d-flex flex-row">Explore your dashboard</span>*/}
       <div
         className="d-flex flex-column mt-4 bg-white mx-auto align-items-center"
         style={{ maxWidth: "655px" }}

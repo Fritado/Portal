@@ -5,7 +5,7 @@ import { WebsiteProviderList } from "../../data/ProviderList";
 const StepTwo = ({ onPrev, onNext }) => {
   return (
     <div>
-      <span className="d-flex flex-row">Select your provider </span>
+      {/*<span className="d-flex flex-row">Select your provider </span>*/}
       <div
         className="d-flex flex-column mt-4 bg-white mx-auto justify-content-center"
         style={{ maxWidth: "655px" }}

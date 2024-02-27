@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Spinner from ".././shared/Spinner";
+import Header from "../common/Header";
 
 const DomainPage = () => {
   const [urlInput, setUrlInput] = useState("");
@@ -47,6 +48,7 @@ const DomainPage = () => {
 
   return (
     <div>
+      <Header />
       <div className="mt-2 d-flex align-items-center mx-auto auth px-0">
         {loading ? (
           <Spinner />

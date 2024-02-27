@@ -5,23 +5,12 @@ import { IoMdRadioButtonOn, IoMdRadioButtonOff , IoMdArrowForward} from "react-i
 import { TiTick } from "react-icons/ti";
 import { LuBadgeHelp } from "react-icons/lu";
 import AuthFooter from "../common/AuthFooter";
+import Header from "../common/Header";
 
 const Pricing = () => {
   return (
-    <div className="d-flex flex-column mt-2">
-       <nav className="d-flex flex-row justify-content-between px-3 pb-2">
-        <div className="brand-logo">
-          <img
-            src={require("../assets/images/logo2.png")}
-            alt="logo"
-            className="d-flex"
-            style={{ height: "3rem" }}
-          />
-        </div>
-        <div className="">
-          <span>Hello Name Here </span>
-        </div>
-      </nav>
+    <div className="d-flex flex-column">
+       <Header />
       <div className="d-flex mx-auto my-4">
         <div className="bg-white">
           <div className="d-flex flex-row justify-content-between pricing ">

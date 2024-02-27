@@ -16,10 +16,11 @@ const ForgotPassword = () => {
   const handelOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "api/auth/reset-password-token";
+      const url = "api/auth/reset-password-token-link";
+      //console.log(url)
       const res = await axios.post(url, { email });
-      console.log(res);
-      dispatch(setToken(res.data.data.token));
+      //console.log(res);
+      //dispatch(setToken(res.data.data.token));
       setEmailSent(true);
       toast.success("Email sent  Successfull");
     } catch (error) {
