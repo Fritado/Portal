@@ -50,7 +50,7 @@ const Overview = () => {
   return (
     <div>
       <OnSiteCode />
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row mb-4">
         <div className="border-right bg-white p-2" style={{ width: "30%" }}>
           {sideListName.map((element, id) => {
             const isSelected = selectedItemId === element.id;

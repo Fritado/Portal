@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IoArrowUpCircleOutline } from "react-icons/io5";
 
 
 const tabsName = [
@@ -10,6 +11,24 @@ const tabsName = [
 ];
 
 const OnSiteCode = () => {
+  const[showButton , setShowButton] = useState(false);
+  useEffect(()=>{
+    const handleScrollButtonVisibility = () =>{
+      window.scrollY > 300 ? setShowButton(true) :setShowButton(false);
+    };
+    window.addEventListener('scroll' , handleScrollButtonVisibility);
+
+    return ()=>{
+      window.removeEventListener('scroll' , handleScrollButtonVisibility)
+    }
+  },[]);
+
+  const handleScrollToTop=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }
   return (
     <div>
       <div className="d-flex flex-row border-bottom mb-3 py-3">
@@ -21,6 +40,16 @@ const OnSiteCode = () => {
           );
         })}
       </div>
+      {/* scroll to top */}
+      {showButton && (
+      <div className={`position-relative mb-4 scrollToTop`} style={{float:"right"}}>
+        <span 
+        onClick={handleScrollToTop}
+        className=" cursor-pointer position-fixed rounded pl-1" style={{bottom:"5.5rem",width:"36px" ,padding:"6px", backgroundColor:"rgba(47, 130, 162, 0.86)"}}>
+          < IoArrowUpCircleOutline size={26} color="white"/>
+        </span>
+      </div>
+)}
     </div>
   );
 };

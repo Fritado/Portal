@@ -34,6 +34,8 @@ import BlogAutomation from "./ContentMarketing/BlogAutomation";
 import BlogOverView from "./ContentMarketing/BlogOverView";
 import BlogHistory from "./ContentMarketing/BlogHistory";
 import HelpCenterPage from "./HelpCenter/HelpCenterPage";
+import FritadoOverviewPg1 from "./HelpCenter/selfService/Fritado-Overview/FritadoOverviewPg1";
+import FritadoOverviewPg2 from "./HelpCenter/selfService/Fritado-Overview/FritadoOverviewPg2";
 
 
 class AppRoutes extends Component {
@@ -80,6 +82,8 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/blog-history" component={BlogHistory} />
           {/* Help center routes */}
           <ProtectedRoute path="/help-center-page" component={HelpCenterPage} />
+          <ProtectedRoute path="#" component={FritadoOverviewPg1} />
+          <ProtectedRoute path="#" component={FritadoOverviewPg2} />
           <Redirect to="/login" />
         </Switch>
       </Suspense>

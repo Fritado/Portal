@@ -71,6 +71,7 @@ class App extends Component {
       "/pagespeed-insights",
       "/connect-website",
       "/help-center-page",
+      "/what-fritado",
       "/user-pages/login-2",
       "/user-pages/register-2",
       "/user-pages/lockscreen",

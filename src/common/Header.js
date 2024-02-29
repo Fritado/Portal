@@ -6,17 +6,8 @@ import { logoutUser } from "../slice/authSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user?.data.user);
-  const storedUsername = localStorage.getItem("username");
-  console.log("storedUsername", storedUsername);
-  useEffect(() => {
-    // If there's a stored username, dispatch the loginUser action
-    if (storedUsername) {
-      //dispatch(loginUser({ username: storedUsername }));
-    }
-  }, [dispatch, storedUsername]);
 
   const handleLogoutBtn = () => {
-    localStorage.removeItem("username");
     dispatch(logoutUser());
   };
   return (

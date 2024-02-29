@@ -320,8 +320,90 @@ class Sidebar extends Component {
 
           
           <li className="nav-item nav-category">
-            <Trans>Data Representation</Trans>
+            <Trans>Marketing</Trans>
           </li>
+
+          <li
+            className={
+              this.isPathActive("/charts") ? "nav-item active" : "nav-item"
+            }
+          >
+            <div
+              className={
+                this.state.chartsMenuOpen
+                  ? "nav-link menu-expanded"
+                  : "nav-link"
+              }
+              onClick={() => this.toggleMenuState("chartsMenuOpen")}
+              data-toggle="collapse"
+            >
+              <span className="icon-bg">
+                <i className="mdi mdi-chart-bar menu-icon"></i>
+              </span>
+              <span className="menu-title">
+                <Trans>Leads</Trans>
+              </span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={this.state.chartsMenuOpen}>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/charts/chart-js")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/charts/chart-js"
+                  >
+                    <Trans>Leads</Trans>
+                  </Link>
+                </li>
+              </ul>
+            </Collapse>
+          </li>
+          <li
+            className={
+              this.isPathActive("/charts") ? "nav-item active" : "nav-item"
+            }
+          >
+            <div
+              className={
+                this.state.chartsMenuOpen
+                  ? "nav-link menu-expanded"
+                  : "nav-link"
+              }
+              onClick={() => this.toggleMenuState("chartsMenuOpen")}
+              data-toggle="collapse"
+            >
+              <span className="icon-bg">
+                <i className="mdi mdi-chart-bar menu-icon"></i>
+              </span>
+              <span className="menu-title">
+                <Trans>Email Automation</Trans>
+              </span>
+              <i className="menu-arrow"></i>
+            </div>
+            <Collapse in={this.state.chartsMenuOpen}>
+              <ul className="nav flex-column sub-menu">
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/charts/chart-js")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/charts/chart-js"
+                  >
+                    <Trans>Email Automation</Trans>
+                  </Link>
+                </li>
+              </ul>
+            </Collapse>
+          </li>
+          {/* /////////////////////////////////////////////// */}
           <li
             className={
               this.isPathActive("/charts") ? "nav-item active" : "nav-item"
