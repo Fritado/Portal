@@ -7,19 +7,8 @@ const Competetors = () => {
   return (
     <div>
       <div className="page-header">
-        <h3 className="page-title">Competetors</h3>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="!#" onClick={(event) => event.preventDefault()}>
-                On Boarding
-              </Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Competetors
-            </li>
-          </ol>
-        </nav>
+        <h2 className="text-dark font-weight-bold mb-2">Competetors</h2>
+        
       </div>
       <div className="row">
         <div className="col-12 grid-margin stretch-card">

@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import CodeCard from "./CodeCard";
 import { IoEye } from "react-icons/io5";
 import OnSiteCode from "./OnSiteCode";
@@ -43,29 +43,25 @@ const sideListName = [
   },
 ];
 const Overview = () => {
-  const [selectedItemId, setSelectedItemId] = useState(null);
-  const handleItemClick = (id) => {
-    setSelectedItemId(id);
-  };
   return (
     <div>
       <OnSiteCode />
       <div className="d-flex flex-row mb-4">
         <div className="border-right bg-white p-2" style={{ width: "30%" }}>
           {sideListName.map((element, id) => {
-            const isSelected = selectedItemId === element.id;
             return (
               <div>
                 <ul
-                  onClick={() => handleItemClick(element.id)}
-                className={`py-2 cursor-pointer ${isSelected ? 'selected-item' : ''}`}
+                  className={`py-2 cursor-pointer 
+                    
+                 `}
                   style={{ backgroundColor: "#d9d8d8", listStyle: "none" }}
                 >
                   <li key={id}>
                     <Link
                       to={element.title}
                       smooth={true}
-                      offset={-430}
+                      offset={-130}
                       duration={500}
                     >
                       {element.title}
@@ -160,14 +156,16 @@ const Overview = () => {
             </div>
           </div>
           <div className="mx-4">
-            <CodeCard
-              id="Add alterante text"
-              heading="Add alterante text"
-              title1="Name title"
-              title2="Previous title"
-              para1="Fritado | Automating content Marketing with generative AI"
-              para2="Fritado"
-            />
+            <div id="Add alterante text">
+              <CodeCard
+                id="Add alterante text"
+                heading="Add alterante text"
+                title1="Name title"
+                title2="Previous title"
+                para1="Fritado | Automating content Marketing with generative AI"
+                para2="Fritado"
+              />
+            </div>
           </div>
           <div className="mx-4">
             <div id="Monthly link target">

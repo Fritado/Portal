@@ -29,7 +29,7 @@ import selectPlan from "./on-boarding/SelectPlan";
 import VerifyOtp from "./user-pages/VerifyOtp";
 import OnSiteCode from "./onSite/OnSiteCode";
 import OnSitePageSpeed from "./onSite/OnSitePageSpeed";
-import Overview from "./onSite/Overview";
+import OnSiteOverview from "./onSite/OnSiteOverview";
 import BlogAutomation from "./ContentMarketing/BlogAutomation";
 import BlogOverView from "./ContentMarketing/BlogOverView";
 import BlogHistory from "./ContentMarketing/BlogHistory";
@@ -74,9 +74,9 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/add-keyword" component={AddKeyword} />
           <ProtectedRoute path="/billing-plan" component={BillingPlans} />
           <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
-          <ProtectedRoute path="/onsite-code" component={OnSiteCode} />
-          <ProtectedRoute path="/pagespeed" component={OnSitePageSpeed} />
-          <ProtectedRoute path="/overview" component={Overview} />
+          <ProtectedRoute path="/onsite-code" component={OnSiteCode } />
+          <ProtectedRoute path="/on-site-pagespeed" component={OnSitePageSpeed} />
+          <ProtectedRoute path="/onsite-overview" component={OnSiteOverview} />
           <ProtectedRoute path="/blog-automation" component={BlogAutomation} />
           <ProtectedRoute path="/blog-overview" component={BlogOverView} />
           <ProtectedRoute path="/blog-history" component={BlogHistory} />

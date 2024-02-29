@@ -71,19 +71,8 @@ const Keywords = () => {
   return (
     <div>
       <div className="page-header">
-        <h3 className="page-title"> KeyWords</h3>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="!#" onClick={(event) => event.preventDefault()}>
-                Tables
-              </a>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Basic tables
-            </li>
-          </ol>
-        </nav>
+        <h2 className="text-dark font-weight-bold mb-2"> KeyWords</h2>
+        
       </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">

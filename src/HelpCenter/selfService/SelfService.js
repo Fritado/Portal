@@ -6,6 +6,8 @@ import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 import FritadoOverviewPg1 from "./Fritado-Overview/FritadoOverviewPg1";
 import FritadoOverviewPg2 from "./Fritado-Overview/FritadoOverviewPg2";
+import FritadoOverviewPg3 from "./Fritado-Overview/FritadoOverviewPg3";
+import FritadoOverviewPg4 from "./Fritado-Overview/FritadoOverviewPg4";
 
 const SelfService = () => {
   const [show, setShow] = useState(false);
@@ -40,7 +42,7 @@ const SelfService = () => {
                     <div>
                       <div
                         onClick={() => setShow(!show)}
-                        className="pb-1 d-flex flex-row justify-content-between "
+                        className="py-1 d-flex flex-row justify-content-between "
                       >
                         <p className="cursor-pointer">What is fritado ?</p>
                         <span className="mr-2">
@@ -51,16 +53,17 @@ const SelfService = () => {
                           )}
                         </span>
                       </div>
-                      {show && 
+                      {show && (
                         <div className="my-1 ml-12">
                           <FritadoOverviewPg1 />
                         </div>
-                     }
+                      )}
                     </div>
                     <div>
-                      <div 
-                      onClick={() => setShow(!show)}
-                      className=" pb-1 d-flex flex-row justify-content-between">
+                      <div
+                        onClick={() => setShow(!show)}
+                        className=" pb-1 d-flex flex-row justify-content-between"
+                      >
                         <p className="cursor-pointer">My SEO Progresso</p>
                         <span className="mr-2">
                           {show ? (
@@ -76,17 +79,49 @@ const SelfService = () => {
                         </div>
                       ) : null}
                     </div>
-                    <div className=" pb-1 d-flex flex-row justify-content-between">
-                      <p>Seona Affecting My Website</p>
-                      <span className="mr-2">
-                        <MdKeyboardArrowRight size={20} />
-                      </span>
+                    <div>
+                      <div
+                        onClick={() => setShow(!show)}
+                        className="py-1 d-flex flex-row justify-content-between"
+                      >
+                        <p className="cursor-pointer">
+                          Seona Affecting My Website
+                        </p>
+                        <span className="mr-2">
+                          {show ? (
+                            <MdKeyboardArrowDown size={20} />
+                          ) : (
+                            <MdKeyboardArrowRight size={20} />
+                          )}
+                        </span>
+                      </div>
+                      {show ? (
+                        <div className="mb-1 ml-12">
+                          <FritadoOverviewPg3 />
+                        </div>
+                      ) : null}
                     </div>
-                    <div className=" pb-1 d-flex flex-row justify-content-between">
-                      <p style={{ fontSize: "1.1rem" }}>Pricing and Billing</p>
-                      <span className="mr-2">
-                        <MdKeyboardArrowRight size={20} />
-                      </span>
+                    <div>
+                      <div
+                        onClick={() => setShow(!show)}
+                        className=" py-1 d-flex flex-row justify-content-between"
+                      >
+                        <p className="cursor-pointer">
+                          Pricing and Billing
+                        </p>
+                        <span className="mr-2">
+                          {show ? (
+                            <MdKeyboardArrowDown size={20} />
+                          ) : (
+                            <MdKeyboardArrowRight size={20} />
+                          )}
+                        </span>
+                      </div>
+                      {show ? (
+                        <div className="my-1 ml-12">
+                          <FritadoOverviewPg4 />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </section>

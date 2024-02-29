@@ -8,19 +8,8 @@ const BusinessProfile = () => {
   return (
     <div>
       <div className="page-header">
-        <h3 className="page-title"> Business Profile </h3>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="!#" onClick={(event) => event.preventDefault()}>
-                On Boarding
-              </Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Business Profile
-            </li>
-          </ol>
-        </nav>
+        <h2 className="text-dark font-weight-bold mb-2"> Business Profile </h2>
+        
       </div>
       <div className="row">
         <div className="col-12 grid-margin stretch-card">

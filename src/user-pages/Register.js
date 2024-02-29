@@ -39,7 +39,7 @@ const Register = () => {
     try {
       const url = "api/auth/signup";
       const { formData: res } = await axios.post(url, formData);
-      toast.success("Login Successfull");
+      toast.success("Signup Successfull");
       console.log(res);
 
       history.push("/login");

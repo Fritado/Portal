@@ -31,8 +31,8 @@ const Login = () => {
 
       const { token } = response.data;
       //console.log(token);
-      toast.success("Login Successfull");
       localStorage.setItem("token", token);
+      toast.success("Login Successfull");
 
       history.push("/business-domain");
       dispatch(loginUser(response));
