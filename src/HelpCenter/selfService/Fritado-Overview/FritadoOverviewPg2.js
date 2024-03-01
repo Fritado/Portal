@@ -10,7 +10,7 @@ const FritadoOverviewPg2 = () => {
         {/* what is fritado */}
         <div className="d-flex flex-column py-3">
           <div className="">
-            <h2>My SEO Progress</h2>
+            <h1>My SEO Progress</h1>
             <p>Common questions about Seona and what Seona does for you!</p>
           </div>
           {/* <div>video</div> */}
@@ -18,10 +18,10 @@ const FritadoOverviewPg2 = () => {
         {/*When can I expect to see results from Seona?... */}
         <div className="py-3">
           <div>
-            <h3>
+            <h4>
               When can I expect to see results from Seona? What kind of results
               should I expect?
-            </h3>
+            </h4>
             <p>
               SEO takes time to show results. However, Seona gets to work fast
               and efficiently. You should start to see your rankings rise slowly
@@ -34,10 +34,10 @@ const FritadoOverviewPg2 = () => {
 
         {/* Will my site be punished on search engines... */}
         <div className="py-3">
-          <h3>
+          <h4>
             Will my site be punished on search engines such as Google for having
             AI written content?
-          </h3>
+          </h4>
           <p>
             It will not. Search engines reward high-quality and relevant content
             which is what Seona is trained to write. Your site will not be

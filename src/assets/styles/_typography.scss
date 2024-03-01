@@ -11,7 +11,7 @@ body {
 h1,
 h2,
 h3,
-h4,
+
 h5,
 h6,
 .h1,
@@ -22,6 +22,9 @@ h6,
 .h6 {
   font-family: $type1;
   font-weight: 600;
+}
+h4{
+  font-weight: 700;
 }
 p {
   font-size: $default-font-size;
@@ -40,7 +43,7 @@ h3,
 }
 h4,
 .h4 {
-  font-size: 1.125rem;
+  font-size: 1.145rem;
 }
 h5,
 .h5 {
