@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useHistory } from "react-router-dom";
 import { IoArrowUpCircleOutline } from "react-icons/io5";
 
 const tabsName = [
@@ -11,6 +11,7 @@ const tabsName = [
 
 const OnSiteCode = () => {
   const [showButton, setShowButton] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const handleScrollButtonVisibility = () => {
@@ -29,6 +30,11 @@ const OnSiteCode = () => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    history.push("/onsite-overview");
+  }, []);
+
   return (
     <div>
       <div className="d-sm-flex page-header">

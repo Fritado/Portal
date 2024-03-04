@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { IoArrowUpCircleOutline } from "react-icons/io5";
 
 const BlogtabsName = [
   { id: "1", title: "Overview", path: "/blog-overview" },
-  { id: "2", title: "History", path: "#" },
+  { id: "2", title: "History", path: "/blog-history" },
   { id: "3", title: "Settings", path: "#" },
 ];
 const BlogAutomation = () => {
   const [showButton, setShowButton] = useState(false);
+  const history = useHistory();
+
   useEffect(() => {
     const handleScrollButtonVisibility = () => {
       window.scrollY > 300 ? setShowButton(true) : setShowButton(false);
@@ -26,6 +28,10 @@ const BlogAutomation = () => {
       behavior: "smooth",
     });
   };
+  useEffect(() => {
+    history.push("/blog-overview");
+  }, []);
+
   return (
     <div>
       <div className="d-sm-flex page-header">

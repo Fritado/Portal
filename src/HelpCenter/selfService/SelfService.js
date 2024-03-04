@@ -50,7 +50,7 @@ const SelfService = () => {
                   <div className="pt-3">
                     {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
 
-                    {FritadoOverViews.map((ele) => {
+                    {FritadoOverView.map((ele) => {
                       return (
                         <div className="py-1 d-flex flex-row justify-content-between ">
                           <p
@@ -195,7 +195,7 @@ const SelfService = () => {
                   <div className="pt-3">
                     {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
 
-                    {GeneralResources.map((ele) => {
+                    {GeneralResource.map((ele) => {
                       return (
                         <div className="py-1 d-flex flex-row justify-content-between ">
                           <p

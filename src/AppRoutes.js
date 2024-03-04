@@ -34,9 +34,6 @@ import BlogAutomation from "./ContentMarketing/BlogAutomation";
 import BlogOverView from "./ContentMarketing/BlogOverView";
 import BlogHistory from "./ContentMarketing/BlogHistory";
 import HelpCenterPage from "./HelpCenter/HelpCenterPage";
-import FritadoOverviewPg1 from "./HelpCenter/selfService/Fritado-Overview/FritadoOverviewPg1";
-import FritadoOverviewPg2 from "./HelpCenter/selfService/Fritado-Overview/FritadoOverviewPg2";
-
 
 class AppRoutes extends Component {
   render() {
@@ -74,16 +71,18 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/add-keyword" component={AddKeyword} />
           <ProtectedRoute path="/billing-plan" component={BillingPlans} />
           <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
-          <ProtectedRoute path="/onsite-code" component={OnSiteCode } />
-          <ProtectedRoute path="/on-site-pagespeed" component={OnSitePageSpeed} />
+          <ProtectedRoute path="/onsite-code" component={OnSiteCode} />
+          <ProtectedRoute
+            path="/on-site-pagespeed"
+            component={OnSitePageSpeed}
+          />
           <ProtectedRoute path="/onsite-overview" component={OnSiteOverview} />
           <ProtectedRoute path="/blog-automation" component={BlogAutomation} />
           <ProtectedRoute path="/blog-overview" component={BlogOverView} />
           <ProtectedRoute path="/blog-history" component={BlogHistory} />
           {/* Help center routes */}
           <ProtectedRoute path="/help-center-page" component={HelpCenterPage} />
-          <ProtectedRoute path="#" component={FritadoOverviewPg1} />
-          <ProtectedRoute path="#" component={FritadoOverviewPg2} />
+
           <Redirect to="/login" />
         </Switch>
       </Suspense>
