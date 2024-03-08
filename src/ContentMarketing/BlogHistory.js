@@ -43,50 +43,62 @@ const BlogHistory = () => {
   return (
     <div className="">
       <BlogAutomation />
-     
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <table className="table borderd">
-            <thead>
-              <tr>
-                <th />
-                <th>Username</th>
-                <th>Age</th>
-                <th>Gender</th>
-              </tr>
-            </thead>
-            <Droppable droppableId="droppable-1">
-              {(provider) => (
-                <tbody
-                  className="text-capitalize"
-                  ref={provider.innerRef}
-                  {...provider.droppableProps}
-                >
-                  {users?.map((user, index) => (
-                    <Draggable
-                      key={user.name}
-                      draggableId={user.name}
-                      index={index}
-                    >
-                      {(provider) => (
-                        <tr
-                          {...provider.draggableProps}
-                          ref={provider.innerRef}
-                        >
-                          <td {...provider.dragHandleProps}> = </td>
-                          <td>{user.name}</td>
-                          <td>{user.age}</td>
-                          <td>{user.gender}</td>
-                        </tr>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provider.placeholder}
-                </tbody>
-              )}
-            </Droppable>
-          </table>
-        </DragDropContext>
-     
+
+      <div className="col-lg-12 grid-margin stretch-card">
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title">Inverse table</h4>
+            <p className="card-description">
+              {" "}
+              Add className <code>.table-dark</code>
+            </p>
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <div className="table-responsive">
+                <table className="table table-dark">
+                  <thead>
+                    <tr>
+                    <th> # </th>
+                      <th>Username</th>
+                      <th>Age</th>
+                      <th>Gender</th>
+                    </tr>
+                  </thead>
+                  <Droppable droppableId="droppable-1">
+                    {(provider) => (
+                      <tbody
+                        className="text-capitalize"
+                        ref={provider.innerRef}
+                        {...provider.droppableProps}
+                      >
+                        {users?.map((user, index) => (
+                          <Draggable
+                            key={user.name}
+                            draggableId={user.name}
+                            index={index}
+                          >
+                            {(provider) => (
+                              <tr
+                                {...provider.draggableProps}
+                                ref={provider.innerRef}
+                              >
+                                <td {...provider.dragHandleProps}> = </td>
+                                <td>{user.name}</td>
+                                <td>{user.age}</td>
+                                <td>{user.gender}</td>
+                              </tr>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provider.placeholder}
+                      </tbody>
+                    )}
+                  </Droppable>
+                </table>
+              </div>
+            </DragDropContext>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,48 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AuthFooter from "../common/AuthFooter";
 import { useHistory, useParams, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setToken } from "../slice/tokenSlice";
 
-const ResetPassword = () => {
+const NewPassword = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const { token } = useParams();
+  //console.log("token value coming from reset-pasword", token);
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
   });
   const { password, confirmPassword } = formData;
   const handleOnChange = ({ currentTarget: input }) => {
-    //console.log(input.value)
+    console.log("input typing value", input.value);
     setFormData({ ...formData, [input.name]: input.value });
   };
 
-  const handelOnSubmit = async (e) => {
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const url = `api/auth/reset-password`;
-      console.log(url);
+      //let url = `api/auth/reset-password`;
+      let url = "http://localhost:3000/api/auth/reset-password";
+      console.log("resetpassowrd url ", url);
       const res = await axios.post(url, {
         password,
-        confirmPassword,
         token,
       });
       console.log("resdata", res);
       toast.success("Password Reset Successfull");
       history.push("/login");
     } catch (error) {
-      toast.error("!Token expired please generate new link");
-      console.log(error);
-      console.log("Error resetting password");
+      if (error.response && error.response.status === 403) {
+        toast.error("Token expired. Please generate a new link.");
+      } else {
+        toast.error("Error resetting password");
+      }
+      console.error(error);
     }
   };
+
   return (
     <div>
       <div className="d-flex align-items-center auth px-0">
@@ -60,11 +62,11 @@ const ResetPassword = () => {
               <h6 className="font-weight-light">
                 Signing up is easy. It only takes a few steps
               </h6>
-              <form onSubmit={handelOnSubmit} className="pt-3">
+              <form className="pt-3">
                 <div className="form-group">
                   <input
                     required
-                    type={showPassword ? "text" : "password"}
+                    type="password"
                     name="password"
                     value={password}
                     placeholder="Password"
@@ -73,7 +75,7 @@ const ResetPassword = () => {
                     onChange={handleOnChange}
                   />
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                   <input
                     required
                     type={showConfirmPassword ? "text" : "password"}
@@ -84,11 +86,10 @@ const ResetPassword = () => {
                     placeholder="Re-type Password"
                     onChange={handleOnChange}
                   />
-                </div>
+                </div> */}
 
                 <button
-                  type="submit"
-                  //disabled={!showPassword || !showConfirmPassword}
+                  onClick={handlePasswordReset}
                   className="mt-3 btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
                 >
                   RESET PASSWORD
@@ -108,4 +109,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default NewPassword;

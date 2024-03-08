@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IoMdLogOut } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { logoutUser } from "../slice/authSlice";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user?.data.user);
-
+ const dispatch = useDispatch()
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+ // console.log(storedUser);
+  
   const handleLogoutBtn = () => {
     dispatch(logoutUser());
   };
@@ -26,7 +27,7 @@ const Header = () => {
             <strong> Hello,</strong>
           </p>
           <span className="text-dark">
-            {user?.firstname} {user?.lastname}
+            {storedUser.firstname} {storedUser.lastname}
           </span>
           <span className="pl-3 cursor-pointer" onClick={handleLogoutBtn}>
             <IoMdLogOut size={25} />

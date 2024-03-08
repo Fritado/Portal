@@ -14,51 +14,22 @@ import { setUserProfile } from "../slice/ProfileSlice";
 import { loginUser } from "../slice/authSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const user = useSelector((state) => state.auth.user?.data.user);
 
-  console.log("user", user);
-  console.log("token", token);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    about: "",
+    contactNumber: "",
+  });
+  const { firstname, lastname, contactNumber, about } = formData;
 
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const updateProfile = async (token, data) => {
-    
-
-    try {
-      setLoading(true);
-      const ProfileResponse = await axios.put("api/auth/update-Profile", data, {
-        Authorization: `Bearer ${token}`,
-      });
-      console.log("Profileresponse coming", ProfileResponse);
-      if (!ProfileResponse.data.success) {
-        throw new Error(ProfileResponse.data.message);
-      }
-
-      dispatch(setUserProfile({ ...ProfileResponse.data.updatedUserDetails }));
-
-      toast.success("Profile updated successfully");
-    } catch (error) {
-      console.log("UPDATE_PROFILE_API API ERROR - ", error.message);
-      toast.error("Error while updating profile details ... please wait");
-    } finally {
-      setLoading(false);
-    }
-  };
-  const submitProfileForm = async (e,formdata) => {
-    e.preventDefault();
-     console.log("Form Data - ", formdata)
-    try {
-      dispatch(updateProfile(token, formdata));
-    } catch (error) {
-      console.log("ERROR MESSAGE - ", error.message);
-    }
+  const handleChange = ({ currentTarget: input }) => {
+    setFormData({ ...formData, [input.name]: input.value });
+    console.log("Form Data:", formData);
   };
 
   return (
@@ -140,12 +111,9 @@ const Profile = () => {
                     id="firstName"
                     placeholder="Enter First Name"
                     className="ip-style border rounded p-4 "
-                    defaultValue={user?.firstname}
-                    {...register("firstName", { required: true })}
+                    value={firstname}
+                    onChange={handleChange}
                   />
-                  {errors.fisrtName && (
-                    <span>Please enter your first name</span>
-                  )}
                 </div>
                 <div className="d-flex flex-column ml-2">
                   <label htmlFor="lastName" className="">
@@ -158,10 +126,9 @@ const Profile = () => {
                     id="lastName"
                     placeholder="Enter Last Name"
                     className="ip-style border rounded p-4"
-                    defaultValue={user?.lastname}
-                    {...register("lastName", { required: true })}
+                    value={lastname}
+                    onChange={handleChange}
                   />
-                  {errors.fisrtName && <span>Please enter your last name</span>}
                 </div>
               </div>
 
@@ -181,39 +148,33 @@ const Profile = () => {
               </div>
 
               <div className="d-flex flex-column input-box ">
-                <label htmlFor="mobileNo" className="">
+                <label htmlFor="contactNumber" className="">
                   <IoMdPhonePortrait /> Mobile No.
                 </label>
                 <input
                   type="tel"
-                  name="Mobile No."
+                  name="contactNumber"
                   id="mobileNo"
                   placeholder="123-45-678"
                   className="ip-style border rounded p-4"
-                  {...register("contactNumber", {
-                    required: {
-                      value: true,
-                      message: "Please enter your Contact Number.",
-                    },
-                    maxLength: { value: 12, message: "Invalid Contact Number" },
-                    minLength: { value: 10, message: "Invalid Contact Number" },
-                  })}
+                  value={contactNumber}
+                  onChange={handleChange}
                 />
-                {errors.mobileNo && <span>Please enter your Number here </span>}
               </div>
               <div className="d-flex flex-column input-box">
-                <label htmlFor="address" className="">
-                  <PiAddressBookBold /> Address
+                <label htmlFor="about" className="">
+                  <PiAddressBookBold />
+                  About
                 </label>
                 <textarea
-                  name="address"
-                  id="address"
+                  name="about"
+                  id="about"
                   cols="20"
                   rows="2"
-                  placeholder="Enter Your Address here"
+                  placeholder="About Yourself"
                   className=" border rounded p-4"
-                  {...register("about", { required: true })}
-
+                  value={about}
+                  onChange={handleChange}
                 />
               </div>
               <div className="d-flex flex-column input-box">
@@ -226,16 +187,15 @@ const Profile = () => {
                   id="image"
                   placeholder="Browse"
                   className=" border rounded p-2"
-                  
                 />
               </div>
 
               <button
                 type="submit"
-                onClick={submitProfileForm}
+                disabled={loading}
                 className=" profile-btn mt-4 btn btn-primary mr-2"
               >
-                Submit
+                {loading ? "Updating..." : "Submit"}
               </button>
             </div>
           </form>

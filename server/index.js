@@ -6,6 +6,7 @@ const userRoutes = require("./routes/user");
 const scrapeRoute = require("./routes/scrape")
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
+const fileupload = require('express-fileupload');
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 4000;
 database.connect();
 
 //middleware
+app.use(fileupload());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +32,8 @@ app.use(express.urlencoded({
 //routes
 //http://localhost:4000/api/fritado
 app.use("/api/auth" , userRoutes);
-app.use("/api/scrape" , scrapeRoute );
+//app.use("/api/scrape" , scrapeRoute );
+
 
 //default routes
 app.get("/" , (req,res) =>{

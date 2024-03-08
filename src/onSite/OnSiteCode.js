@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link , useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoArrowUpCircleOutline } from "react-icons/io5";
 
 const tabsName = [
-  { id: "1", title: "Overview", path: "/onsite-overview" },
+  { id: "1", title: "Overview", path: "/onsite-code" },
   { id: "2", title: "PageSpeed Insights", path: "/on-site-pagespeed" },
   { id: "3", title: "Preview", path: "#" },
   { id: "4", title: "Settings", path: "#" },
@@ -11,7 +11,7 @@ const tabsName = [
 
 const OnSiteCode = () => {
   const [showButton, setShowButton] = useState(false);
-  const history = useHistory();
+  
 
   useEffect(() => {
     const handleScrollButtonVisibility = () => {
@@ -31,9 +31,6 @@ const OnSiteCode = () => {
     });
   };
 
-  useEffect(() => {
-    history.push("/onsite-overview");
-  }, []);
 
   return (
     <div>

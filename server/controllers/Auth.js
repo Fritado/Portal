@@ -89,26 +89,6 @@ exports.signup = async (req, res) => {
       });
     }
 
-    //find the most recent OTP for the email
-    // const recentOTP = await Otp.find({ email })
-    //   .sort({ createdAt: -1 })
-    //   .limit(1);
-    // console.log("recentOtp...", recentOTP);
-
-    // if (recentOTP.length == 0) {
-    //   // OTP not found for the email
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "OTP not found",
-    //   });
-    // } else if (otp != recentOTP[0].otp) {
-    //   // Invalid OTP
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "The OTP is not valid",
-    //   });
-    // }
-
     //hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     //entry created in DB of a Profile of user
@@ -155,8 +135,8 @@ exports.login = async (req, res) => {
     }
     // Find user with provided email
     const user = await User.findOne({ email }).populate("additionalDetails");
-
-    //if User nor found with this provided email
+   console.log(user)    
+   //if User not found with this provided email
     if (!user) {
       return res.status(401).json({
         success: false,

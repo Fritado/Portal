@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -26,17 +26,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const url = "api/auth/login";
-      //const { formData: res } = await axios.post(url, formData);
       const response = await axios.post(url, formData);
-
-      const { token } = response.data;
-      //console.log(token);
-      localStorage.setItem("token", token);
       toast.success("Login Successfull");
 
-      history.push("/business-domain");
+      const { token } = response.data;
+
       dispatch(loginUser(response));
       dispatch(userToken(token));
+      history.push("/business-domain");
     } catch (error) {
       toast.error("This is an error!");
       console.log(error);

@@ -21,19 +21,17 @@ import Error404 from "./error-pages/Error404";
 import Error500 from "./error-pages/Error500";
 import Login from "./user-pages/Login";
 import Register1 from "./user-pages/Register";
-import ResetPassword from "./user-pages/reset-password";
 import ForgotPassword from "./user-pages/ForgotPassword";
 import DomainPage from "./on-boarding/DomainPage";
 import Pricing from "./on-boarding/Pricing";
 import selectPlan from "./on-boarding/SelectPlan";
 import VerifyOtp from "./user-pages/VerifyOtp";
-import OnSiteCode from "./onSite/OnSiteCode";
 import OnSitePageSpeed from "./onSite/OnSitePageSpeed";
 import OnSiteOverview from "./onSite/OnSiteOverview";
-import BlogAutomation from "./ContentMarketing/BlogAutomation";
 import BlogOverView from "./ContentMarketing/BlogOverView";
 import BlogHistory from "./ContentMarketing/BlogHistory";
 import HelpCenterPage from "./HelpCenter/HelpCenterPage";
+import NewPassword from "./user-pages/NewPassword";
 
 class AppRoutes extends Component {
   render() {
@@ -43,8 +41,8 @@ class AppRoutes extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Register1} />
           <Route path="/verify-otp" component={VerifyOtp} />
-          <Route path="/reset-password/:token" component={ResetPassword} />
           <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/reset-password/:token" component={NewPassword} />
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <ProtectedRoute path="/tables/basic-table" component={BasicTable} />
           <ProtectedRoute path="/charts/chart-js" component={ChartJs} />
@@ -71,14 +69,12 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/add-keyword" component={AddKeyword} />
           <ProtectedRoute path="/billing-plan" component={BillingPlans} />
           <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
-          <ProtectedRoute path="/onsite-code" component={OnSiteCode} />
           <ProtectedRoute
             path="/on-site-pagespeed"
             component={OnSitePageSpeed}
           />
-          <ProtectedRoute path="/onsite-overview" component={OnSiteOverview} />
-          <ProtectedRoute path="/blog-automation" component={BlogAutomation} />
-          <ProtectedRoute path="/blog-overview" component={BlogOverView} />
+          <ProtectedRoute path="/onsite-code" component={OnSiteOverview} />
+          <ProtectedRoute path="/blog-automation" component={BlogOverView} />
           <ProtectedRoute path="/blog-history" component={BlogHistory} />
           {/* Help center routes */}
           <ProtectedRoute path="/help-center-page" component={HelpCenterPage} />

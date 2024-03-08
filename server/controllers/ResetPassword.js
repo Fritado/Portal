@@ -16,20 +16,20 @@ exports.resetPasswordToken = async (req, res) => {
     }
 
     const token = crypto.randomBytes(20).toString("hex");
-    
 
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
       {
-        token: token ,
+        token: token,
         resetPasswordExpires: Date.now() + 3600000,
       },
       { new: true }
     );
-   // console.log("DETAILS", updatedDetails);
+    // console.log("DETAILS", updatedDetails);
 
     const url = `http://localhost:3000/reset-password/${token}`;
 
+    console.log("email url ", url);
     await mailSender(
       email,
       "Password Reset Link",
@@ -52,18 +52,11 @@ exports.resetPasswordToken = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-  console.log(req.body)
+  console.log("reset password body", req.body);
   try {
-    const { password, confirmPassword, token } = req.body;
+    const { password, token } = req.body;
 
-    if (confirmPassword != password) {
-      return res.json({
-        success: false,
-        message: "Password and Confirm Password Does not Match",
-      });
-    }
-
-    const userDetails = await User.findOne({ token:token});
+    const userDetails = await User.findOne({ token: token });
     if (!userDetails) {
       return res.json({
         success: false,
@@ -87,7 +80,7 @@ exports.resetPassword = async (req, res) => {
 
     return res.json({
       success: true,
-      message: `Password Reset Successful`,
+      message: `Password Reset Successfully`,
     });
   } catch (error) {
     console.log("Error in resetPassword:", error);

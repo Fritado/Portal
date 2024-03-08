@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Trans } from "react-i18next";
-import { useDispatch , useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../slice/authSlice";
 
 const Navbar = () => {
   const [sidebarIconOnly, setSidebarIconOnly] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) =>state.auth.user?.data.user);
-  
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     // Dispatch the logout action
@@ -100,7 +99,10 @@ const Navbar = () => {
                 </div>
                 <div className="nav-profile-text">
                   <p className="mb-1 text-black">
-                    <Trans>{user?.firstname} {user?.lastname}</Trans>
+                    <Trans>
+                      {" "}
+                      Anisha
+                    </Trans>
                   </p>
                 </div>
               </Dropdown.Toggle>

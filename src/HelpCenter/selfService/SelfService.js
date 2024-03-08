@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import Header from "../../common/Header";
-import { IoSearch } from "react-icons/io5";
-import AuthFooter from "../../common/AuthFooter";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
-import { Link } from "react-router-dom";
-
 import {
   FritadoOverView,
   GettingStarted,
@@ -14,12 +9,55 @@ import {
 } from "../../data/HelpCenterData";
 
 const SelfService = () => {
-  const [show, setShow] = useState(false);
-  const [FritadoOverViews, setFritadoOverViews] = useState(FritadoOverView);
-  const [gettingStart, setgettingStart] = useState(GettingStarted);
-  const [Feature, setFeature] = useState(Features);
-  const [FritadoProo, setFritadoProo] = useState(Fritadopro);
-  const [GeneralResource, setGeneralResource] = useState(GeneralResources);
+  const [openState, setOpenState] = useState({ section: null, index: null });
+
+  const handleAccordionClick = (section, index) => {
+    setOpenState((prev) => {
+      const isOpen = prev.section === section && prev.index === index;
+
+      return {
+        section: isOpen ? null : section,
+        index: isOpen ? null : index,
+      };
+    });
+  };
+
+  const isTitleOpen = (section, index) =>
+    openState.section === section && openState.index === index;
+
+  const renderAccordionSection = (data, sectionName, section) => (
+    <section
+      key={sectionName}
+      className="mt-3 px-4 py-4 bg-white border"
+      style={{ borderRadius: "10px" }}
+    >
+      <div className="border-bottom pb-1 pt-2">
+        <h2 className="pb-2">{sectionName}</h2>
+      </div>
+      <div className="pt-3">
+        {data.map((ele, index) => (
+          <div key={ele.title} className="py-1 d-flex flex-column">
+            <div
+              onClick={() => handleAccordionClick(sectionName, index)}
+              className="d-flex flex-row justify-content-between"
+            >
+              <p className="cursor-pointer">{ele.title}</p>
+              <span className="mr-2">
+                {openState[sectionName]?.[index] ? (
+                  <MdKeyboardArrowDown size={20} />
+                ) : (
+                  <MdKeyboardArrowRight size={20} />
+                )}
+              </span>
+            </div>
+            {isTitleOpen(sectionName, index) && (
+              <div className="my-1 ml-12">{ele.flipContent}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 
   return (
     <div>
@@ -39,187 +77,25 @@ const SelfService = () => {
                 className=" d-flex flex-column mt-2"
                 style={{ gap: "25px", borderRadius: "8px" }}
               >
-                {/* inner section-1 , it will replicate*/}
-                <section
-                  className="mt-3 px-4 py-4 bg-white border"
-                  style={{ borderRadius: "10px" }}
-                >
-                  <div className="border-bottom pb-1 pt-2">
-                    <h2 className="pb-2">Fritado Overview</h2>
-                  </div>
-                  <div className="pt-3">
-                    {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
-
-                    {FritadoOverView.map((ele) => {
-                      return (
-                        <div className="py-1 d-flex flex-row justify-content-between ">
-                          <p
-                            onClick={() => setShow(!show)}
-                            className="cursor-pointer"
-                          >
-                            {ele.title}
-                          </p>
-                          <span className="mr-2">
-                            {show ? (
-                              <MdKeyboardArrowDown size={20} />
-                            ) : (
-                              <MdKeyboardArrowRight size={20} />
-                            )}
-                          </span>
-
-                          {show && (
-                            <div className="my-1 ml-12">{ele.flipContent}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-
-                {/*/* inner section-2 , it will replicate*/}
-                <section
-                  className="mt-3 px-4 py-4 bg-white border"
-                  style={{ borderRadius: "10px" }}
-                >
-                  <div className="border-bottom pb-1 pt-2">
-                    <h2 className="pb-2">Getting Started</h2>
-                  </div>
-                  <div className="pt-3">
-                    {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
-
-                    {gettingStart.map((ele) => {
-                      return (
-                        <div className="py-1 d-flex flex-row justify-content-between ">
-                          <p
-                            onClick={() => setShow(!show)}
-                            className="cursor-pointer"
-                          >
-                            {ele.title}
-                          </p>
-                          <span className="mr-2">
-                            {show ? (
-                              <MdKeyboardArrowDown size={20} />
-                            ) : (
-                              <MdKeyboardArrowRight size={20} />
-                            )}
-                          </span>
-
-                          {show && (
-                            <div className="my-1 ml-12">{ele.flipContent}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-                {/*/* inner section-3 , it will replicate*/}
-                <section
-                  className="mt-3 px-4 py-4 bg-white border"
-                  style={{ borderRadius: "10px" }}
-                >
-                  <div className="border-bottom pb-1 pt-2">
-                    <h2 className="pb-2">Features</h2>
-                  </div>
-                  <div className="pt-3">
-                    {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
-
-                    {Feature.map((ele) => {
-                      return (
-                        <div className="py-1 d-flex flex-row justify-content-between ">
-                          <p
-                            onClick={() => setShow(!show)}
-                            className="cursor-pointer"
-                          >
-                            {ele.title}
-                          </p>
-                          <span className="mr-2">
-                            {show ? (
-                              <MdKeyboardArrowDown size={20} />
-                            ) : (
-                              <MdKeyboardArrowRight size={20} />
-                            )}
-                          </span>
-
-                          {show && (
-                            <div className="my-1 ml-12">{ele.flipContent}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-                {/*/* inner section-4 , it will replicate*/}
-                <section
-                  className="mt-3 px-4 py-4 bg-white border"
-                  style={{ borderRadius: "10px" }}
-                >
-                  <div className="border-bottom pb-1 pt-2">
-                    <h2 className="pb-2">Fritado Pro</h2>
-                  </div>
-                  <div className="pt-3">
-                    {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
-
-                    {FritadoProo.map((ele) => {
-                      return (
-                        <div className="py-1 d-flex flex-row justify-content-between ">
-                          <p
-                            onClick={() => setShow(!show)}
-                            className="cursor-pointer"
-                          >
-                            {ele.title}
-                          </p>
-                          <span className="mr-2">
-                            {show ? (
-                              <MdKeyboardArrowDown size={20} />
-                            ) : (
-                              <MdKeyboardArrowRight size={20} />
-                            )}
-                          </span>
-
-                          {show && (
-                            <div className="my-1 ml-12">{ele.flipContent}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-                {/*/* inner section-5 , it will replicate*/}
-                <section
-                  className="mt-3 px-4 py-4 bg-white border"
-                  style={{ borderRadius: "10px" }}
-                >
-                  <div className="border-bottom pb-1 pt-2">
-                    <h2 className="pb-2">General Resources</h2>
-                  </div>
-                  <div className="pt-3">
-                    {/**This div will replicate and from here all list will be wrapped inside link to open new pages */}
-
-                    {GeneralResource.map((ele) => {
-                      return (
-                        <div className="py-1 d-flex flex-row justify-content-between ">
-                          <p
-                            onClick={() => setShow(!show)}
-                            className="cursor-pointer"
-                          >
-                            {ele.title}
-                          </p>
-                          <span className="mr-2">
-                            {show ? (
-                              <MdKeyboardArrowDown size={20} />
-                            ) : (
-                              <MdKeyboardArrowRight size={20} />
-                            )}
-                          </span>
-
-                          {show && (
-                            <div className="my-1 ml-12">{ele.flipContent}</div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
+                {/* ///////////////////////////// */}
+                {renderAccordionSection(
+                  FritadoOverView,
+                  "Fritado Overview",
+                  "overview"
+                )}
+                {renderAccordionSection(
+                  GettingStarted,
+                  "Getting Started",
+                  "started"
+                )}
+                {renderAccordionSection(Features, "Features", "features")}
+                {renderAccordionSection(Fritadopro, "Fritado Pro", "pro")}
+                {renderAccordionSection(
+                  GeneralResources,
+                  "General Resources",
+                  "resources"
+                )}
+                {/* ///////////////////////////////////// */}
               </div>
             </div>
           </section>
