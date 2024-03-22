@@ -3,7 +3,8 @@ import Header from "./common/Header";
 import AuthFooter from "./common/AuthFooter";
 import { TfiControlForward } from "react-icons/tfi";
 import axios from "axios";
-import { Link,useHistory } from "react-router-dom";
+require("dotenv").config();
+import { Link, useHistory } from "react-router-dom";
 
 const PortalWalkThrough = () => {
   const [websiteName, setWebsiteName] = useState("");
@@ -60,8 +61,8 @@ const PortalWalkThrough = () => {
     }
   };
   const analyzeContent = async (e) => {
-    const openAISecretKey =
-      "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";
+    const openAISecretKey = process.env.OPENAPI_KEY;
+
     const prompt = `
       I have copied this  ${cleanContent}  content from a service/business website. I want you to analyse this content and provide me below information.
       1. Write about business in 500 words? Store the answer in Business variable.
@@ -123,7 +124,7 @@ const PortalWalkThrough = () => {
       console.log("Message Content:", messageContent);
       console.log("Keywords Content:", keywordsContent);
       setLoading(false);
-      history.push('/dashboard');
+      history.push("/dashboard");
     } catch (Error) {
       console.log(Error, "Error while calling openAI api ");
       setLoading(false);
