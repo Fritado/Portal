@@ -35,7 +35,7 @@ import NewPassword from "./user-pages/NewPassword";
 import BlogTopicGenerator from "./Prompts/BlogTopicGenerator";
 import UpcomingBlogs from "./ContentMarketing/UpcomingBlogs";
 import PortalWalkThrough from "./PortalWalkThrough";
-import BusinessProfileGenerator from "./Prompts/BusinessProfileGenerator";
+
 
 class AppRoutes extends Component {
   render() {
@@ -94,10 +94,7 @@ class AppRoutes extends Component {
             path="/blog-topic-generator"
             component={BlogTopicGenerator}
           />
-          <ProtectedRoute
-            path="/business-profile-generator"
-            component={BusinessProfileGenerator}
-          />
+         
 
           <Redirect to="/login" />
         </Switch>

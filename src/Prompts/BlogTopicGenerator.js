@@ -23,8 +23,8 @@ const BlogTopicGenerator = () => {
         },
       };
       const response = await axios.get(url, config);
-      const {data} = response.data;
-      console.log("About Business Response",data.aboutBusiness);
+      const { data } = response.data;
+      console.log("About Business Response", data.aboutBusiness);
       setIndustryInfo(data.aboutBusiness);
     } catch (error) {
       console.error(
@@ -35,8 +35,7 @@ const BlogTopicGenerator = () => {
   };
 
   const fetchOpenAITopics = async () => {
-    const openAISecretKey =
-      "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";
+    const openAISecretKey = "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";
 
     const instruction =
       "You are a seasoned copywriter. I want you to write 10 eye-catching blog topics based on the company information that I provide.";

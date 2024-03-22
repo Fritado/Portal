@@ -3,7 +3,6 @@ import Header from "./common/Header";
 import AuthFooter from "./common/AuthFooter";
 import { TfiControlForward } from "react-icons/tfi";
 import axios from "axios";
-require("dotenv").config();
 import { Link, useHistory } from "react-router-dom";
 
 const PortalWalkThrough = () => {
@@ -61,7 +60,7 @@ const PortalWalkThrough = () => {
     }
   };
   const analyzeContent = async (e) => {
-    const openAISecretKey = process.env.OPENAPI_KEY;
+    const openAISecretKey = "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";
 
     const prompt = `
       I have copied this  ${cleanContent}  content from a service/business website. I want you to analyse this content and provide me below information.
