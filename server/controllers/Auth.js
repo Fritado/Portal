@@ -135,7 +135,7 @@ exports.login = async (req, res) => {
     }
     // Find user with provided email
     const user = await User.findOne({ email }).populate("additionalDetails");
-   console.log(user)    
+    //console.log(user)    
    //if User not found with this provided email
     if (!user) {
       return res.status(401).json({

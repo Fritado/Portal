@@ -6,16 +6,16 @@ const User = require("../models/User");
 exports.auth = async (req, res, next) => {
   try {
     //console.log("Request Object:", req);
-   // console.log("BEFORE ToKEN EXTRACTION");
+    // console.log("BEFORE ToKEN EXTRACTION");
     //extract token
 
     const token =
       req.cookies.token ||
       req.body.token ||
-      req.header("Authorization").replace("Bearer ", "");
-    
+      req.header("Authorization")?.replace("Bearer ", "");
+
     //const token = req.cookies.token;
-   /// console.log("AFTER ToKEN EXTRACTION");
+    /// console.log("AFTER ToKEN EXTRACTION");
 
     //if token missing, then return response
     if (!token) {
@@ -46,5 +46,3 @@ exports.auth = async (req, res, next) => {
     });
   }
 };
-
-

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Collapse } from "react-bootstrap";
 import { Trans } from "react-i18next";
-import { FaCode ,FaBlog} from "react-icons/fa";
+import { FaCode, FaBlog } from "react-icons/fa";
+import { LuBadgeHelp } from "react-icons/lu";
 
 class Sidebar extends Component {
   state = {};
@@ -231,9 +232,7 @@ class Sidebar extends Component {
 
           <li
             className={
-              this.isPathActive("/onsite-code")
-                ? "nav-item active"
-                : "nav-item"
+              this.isPathActive("/onsite-code") ? "nav-item active" : "nav-item"
             }
           >
             <div
@@ -268,12 +267,10 @@ class Sidebar extends Component {
                     <Trans>Code Change</Trans>
                   </Link>
                 </li>
-                
               </ul>
             </Collapse>
           </li>
 
-          
           <li
             className={
               this.isPathActive("/blog-automation")
@@ -313,12 +310,10 @@ class Sidebar extends Component {
                     <Trans>Blog Automation</Trans>
                   </Link>
                 </li>
-                
               </ul>
             </Collapse>
           </li>
 
-          
           <li className="nav-item nav-category">
             <Trans>Marketing</Trans>
           </li>
@@ -610,19 +605,17 @@ class Sidebar extends Component {
                 <div>
                   <div className="d-flex align-items-center">
                     <div className="sidebar-profile-img">
-                      <img
-                        src={require("../assets/images/faces/face28.png")}
-                        alt="profile"
-                      />
+                      <span className="icon-bg">
+                        <LuBadgeHelp size={22}/>
+                      </span>
                     </div>
                     <div className="sidebar-profile-text">
                       <p className="mb-1">
-                        <Trans>Henry Klein</Trans>
+                        <Trans>Help Center</Trans>
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="badge badge-danger">3</div>
               </div>
             </div>
           </li>
@@ -655,12 +648,7 @@ class Sidebar extends Component {
               </a>
             </div>
           </li>
-          {/*<li className="nav-item sidebar-user-actions">
-            <div className="sidebar-user-menu">
-              <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-logout menu-icon"></i>
-                <span className="menu-title"><Trans>Log Out</Trans></span></a>
-            </div>
-  </li>*/}
+         
         </ul>
       </nav>
     );

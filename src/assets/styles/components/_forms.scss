@@ -32,9 +32,10 @@
 }
 
 .form-control {
+  line-height: 22px;
   border: 1px solid $border-color;
   font-family: $type1;
-  font-size: $input-font-size;
+  font-size: 1rem;
   font-weight: 400;
 }
 

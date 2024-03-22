@@ -100,8 +100,8 @@ const Navbar = () => {
                 <div className="nav-profile-text">
                   <p className="mb-1 text-black">
                     <Trans>
-                      {" "}
-                      Anisha
+                      
+                     {storedUser.firstname} {storedUser.lastname} 
                     </Trans>
                   </p>
                 </div>

@@ -32,6 +32,10 @@ import BlogOverView from "./ContentMarketing/BlogOverView";
 import BlogHistory from "./ContentMarketing/BlogHistory";
 import HelpCenterPage from "./HelpCenter/HelpCenterPage";
 import NewPassword from "./user-pages/NewPassword";
+import BlogTopicGenerator from "./Prompts/BlogTopicGenerator";
+import UpcomingBlogs from "./ContentMarketing/UpcomingBlogs";
+import PortalWalkThrough from "./PortalWalkThrough";
+import BusinessProfileGenerator from "./Prompts/BusinessProfileGenerator";
 
 class AppRoutes extends Component {
   render() {
@@ -52,6 +56,10 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/pricing" component={Pricing} />
           <ProtectedRoute path="/payment" component={selectPlan} />
           <ProtectedRoute
+            path="/portal-walk-through"
+            component={PortalWalkThrough}
+          />
+          <ProtectedRoute
             path="/pagespeed-insights"
             component={PageSpeedInsights}
           />
@@ -65,9 +73,11 @@ class AppRoutes extends Component {
             component={BusinessProfile}
           />
           <ProtectedRoute path="/keywords" component={keywords} />
+
           <ProtectedRoute path="/competetor" component={Competetors} />
           <ProtectedRoute path="/add-keyword" component={AddKeyword} />
           <ProtectedRoute path="/billing-plan" component={BillingPlans} />
+
           <ProtectedRoute path="/connect-website" component={ConnectWebsite} />
           <ProtectedRoute
             path="/on-site-pagespeed"
@@ -76,8 +86,18 @@ class AppRoutes extends Component {
           <ProtectedRoute path="/onsite-code" component={OnSiteOverview} />
           <ProtectedRoute path="/blog-automation" component={BlogOverView} />
           <ProtectedRoute path="/blog-history" component={BlogHistory} />
+          <ProtectedRoute path="/upcoming-blogs" component={UpcomingBlogs} />
+
           {/* Help center routes */}
           <ProtectedRoute path="/help-center-page" component={HelpCenterPage} />
+          <ProtectedRoute
+            path="/blog-topic-generator"
+            component={BlogTopicGenerator}
+          />
+          <ProtectedRoute
+            path="/business-profile-generator"
+            component={BusinessProfileGenerator}
+          />
 
           <Redirect to="/login" />
         </Switch>

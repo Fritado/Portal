@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -8,8 +8,9 @@ import MobileView from "./MobileView";
 import { ImMobile } from "react-icons/im";
 import { BsLaptop } from "react-icons/bs";
 import { setDomainName } from "../slice/PageSpeedSlics";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from "react-redux";
 import Header from "../common/Header";
+import axios from "axios";
 
 const PageSpeedInsights = () => {
   const [activeTab, setActiveTab] = useState("desktop");
@@ -18,8 +19,10 @@ const PageSpeedInsights = () => {
   const pageSpeedData = location.state?.pageSpeedData;
   const time = pageSpeedData.lighthouseResult.fetchTime;
   const domainName = pageSpeedData.id;
-  dispatch(setDomainName(domainName))
-  console.log("pageSpeedData:", pageSpeedData);
+  dispatch(setDomainName(domainName));
+  const domainNamedata = useSelector(setDomainName ); 
+  const projectName = domainNamedata.payload.domain.domainName
+  console.log("domainNamedata:", projectName);
 
   const inputTime = new Date(time);
   const formattedTime = inputTime.toLocaleString("en-GB", {
@@ -38,9 +41,12 @@ const PageSpeedInsights = () => {
   return (
     <div className="d-flex flex-column">
       <Header />
-     
+
       <div style={{ maxWidth: "960px", margin: "auto" }} className="mt-4 pt-2">
-          <h1 className="pb-1 text-dark text-center">{formattedTime}</h1>
+        <div className="d-flex flex-row mx-auto  justify-content-center">
+          <h1 className="text-center px-3 text-dark ">{projectName} : </h1>
+          <h1 className="pb-1 text-dark text-center">  {formattedTime}</h1>
+        </div>
         <div className="d-flex mx-auto my-2 justify-content-center ">
           {/*<div
             onClick={() => handleTabChange("mobile")}

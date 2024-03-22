@@ -14,7 +14,7 @@ const SelectPlan = () => {
           className=" d-flex mx-auto  w-75 h-100"
         />
       </div>
-      <Link to="/connect-website" className="d-flex">
+      <Link to="portal-walk-through" className="d-flex">
         <span className="my-4 font-weight-bold d-flex text-muted mx-auto">
           Next
           <span>

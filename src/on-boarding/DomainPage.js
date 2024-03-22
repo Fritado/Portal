@@ -1,31 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthFooter from "../common/AuthFooter";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import Spinner from ".././shared/Spinner";
 import Header from "../common/Header";
+import axios from "axios";
 
 const DomainPage = () => {
   const [urlInput, setUrlInput] = useState("");
   const [pageSpeedData, setPageSpeedData] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
+  const apiUrl = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
+  const modifiedUrlInput = `https://${urlInput}`; //https://seo.com
+  const apiKey = "AIzaSyCHCEQO7ge4Rs6ABVtlcOWiejNFp5T9LWI";
+  
   const handleOnChange = (e) => {
     //  console.log(e.target.value);
     const inputPrefix = e.target.value.trim(); //seo.com
-
     setUrlInput(
       inputPrefix.startsWith("https://") ? inputPrefix.slice(8) : inputPrefix
     );
   };
+
+  const savingDomainUrl = async () => {
+    const domainUrl = "http://localhost:4000/api/domainName/projectUrl";
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Token not found"); // Handle case where token is missing
+      }
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in the request headers
+        },
+      };
+      const requestBody = { projectUrl: modifiedUrlInput };
+      const domainUrlResponse = await axios.post(
+        domainUrl,
+        requestBody,
+        config
+      );
+      //console.log("domainUrlResponse:", domainUrlResponse);
+    } catch (error) {
+      console.log("Error while saving domainUrl in database", error);
+    }
+  };
+
   const fetchData = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const apiUrl = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
-    const modifiedUrlInput = `https://${urlInput}`; //https://seo.com
-
-    const apiKey = "AIzaSyCHCEQO7ge4Rs6ABVtlcOWiejNFp5T9LWI";
     const dynamicEndpoint = `${apiUrl}?url=${encodeURIComponent(
       modifiedUrlInput
     )}&key=${apiKey}`;
@@ -35,6 +63,10 @@ const DomainPage = () => {
       const data = await response.json();
 
       setPageSpeedData(data);
+      localStorage.setItem("modifiedUrlInput", modifiedUrlInput);
+      // Save the modifiedUrlInput only if PageSpeed data fetching is successfull
+      await savingDomainUrl();
+
       history.push({
         pathname: "/pagespeed-insights",
         state: { pageSpeedData: data },

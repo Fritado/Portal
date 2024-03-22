@@ -5,8 +5,9 @@ import BlogOverView from "./BlogOverView";
 
 const BlogtabsName = [
   { id: "1", title: "Overview", path: "/blog-automation" },
-  { id: "2", title: "History", path: "/blog-history" },
-  { id: "3", title: "Settings", path: "#" },
+  { id: "2", title: "Upcoming Blog Posts", path: "/upcoming-blogs" },
+  { id: "3", title: "History", path: "/blog-history" },
+  { id: "4", title: "Settings", path: "#" },
 ];
 const BlogAutomation = () => {
   const [showButton, setShowButton] = useState(false);

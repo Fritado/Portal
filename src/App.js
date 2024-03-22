@@ -35,6 +35,7 @@ const App = ({ i18n }) => {
       "/business-domain",
       "/payment",
       "/pricing",
+      "/portal-walk-through",
       "/pagespeed-insights",
       "/connect-website",
       "/help-center-page",
@@ -94,5 +95,3 @@ const App = ({ i18n }) => {
 };
 
 export default withTranslation()(App);
-
-
